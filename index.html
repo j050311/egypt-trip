@@ -1,0 +1,2628 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>埃及古文明 · 尼羅河探險 — 11日旅程指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root {
+    --papyrus: #f3e9d2;
+    --papyrus-dark: #e6d6ae;
+    --sand: #d9b97a;
+    --sand-deep: #c9a45c;
+    --nile: #2d6a7e;
+    --nile-deep: #1d4a5a;
+    --terracotta: #b85431;
+    --terracotta-deep: #8a3a1f;
+    --gold: #c89b3a;
+    --gold-bright: #e0b34a;
+    --hieroglyph: #2a1f12;
+    --ink: #1a1410;
+    --shadow-soft: rgba(42, 31, 18, 0.12);
+    --shadow-deep: rgba(42, 31, 18, 0.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--papyrus);
+    color: var(--ink);
+    line-height: 1.65;
+    background-image:
+      radial-gradient(ellipse at top left, rgba(217, 185, 122, 0.15), transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(45, 106, 126, 0.08), transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, transparent 0 2px, rgba(138, 58, 31, 0.015) 2px 3px),
+      repeating-linear-gradient(-45deg, transparent 0 2px, rgba(138, 58, 31, 0.015) 2px 3px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ============== HEADER ============== */
+  header {
+    position: relative;
+    padding: 60px 24px 40px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(184, 84, 49, 0.08), transparent);
+    z-index: 2;
+  }
+
+  .hero-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--terracotta);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 900;
+    font-size: clamp(32px, 5.5vw, 56px);
+    color: var(--hieroglyph);
+    line-height: 1.1;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+
+  h1 .accent {
+    color: var(--terracotta);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(16px, 2vw, 22px);
+    color: var(--nile-deep);
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  .hero-meta {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 18px;
+    padding: 12px 28px;
+    background: rgba(243, 233, 210, 0.6);
+    border: 1px solid rgba(184, 84, 49, 0.2);
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--hieroglyph);
+  }
+
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+  .hero-meta strong { color: var(--terracotta); font-weight: 700; }
+
+  /* ============== NAV ============== */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(243, 233, 210, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184, 84, 49, 0.2);
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+
+  .nav-inner {
+    display: flex;
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-width: max-content;
+    padding: 0 16px;
+  }
+
+  .nav-btn {
+    background: none;
+    border: none;
+    padding: 14px 18px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--hieroglyph);
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  .nav-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--terracotta);
+    transition: width 0.3s;
+  }
+
+  .nav-btn:hover { color: var(--terracotta); }
+  .nav-btn.active { color: var(--terracotta); font-weight: 700; }
+  .nav-btn.active::after { width: 70%; }
+
+  /* ============== MAIN CONTAINER ============== */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 16px 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  section {
+    margin-bottom: 56px;
+    scroll-margin-top: 80px;
+    animation: fadeUp 0.6s ease-out backwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-head {
+    margin-bottom: 24px;
+    border-bottom: 1px solid rgba(184, 84, 49, 0.25);
+    padding-bottom: 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .section-num {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    color: var(--terracotta);
+    letter-spacing: 0.2em;
+  }
+
+  h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 700;
+    font-size: clamp(24px, 3.5vw, 34px);
+    color: var(--hieroglyph);
+  }
+
+  .section-tag {
+    margin-left: auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--nile);
+    font-size: 16px;
+  }
+
+  /* ============== OVERVIEW CARDS ============== */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+
+  .ov-card {
+    background: rgba(255, 252, 244, 0.7);
+    border: 1px solid rgba(184, 84, 49, 0.18);
+    border-radius: 8px;
+    padding: 18px;
+    transition: all 0.3s;
+  }
+
+  .ov-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px var(--shadow-soft);
+    border-color: var(--terracotta);
+  }
+
+  .ov-card .label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--nile);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .ov-card .value {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--hieroglyph);
+    margin-bottom: 4px;
+  }
+
+  .ov-card .desc {
+    font-size: 12px;
+    color: #5a4a35;
+  }
+
+  /* ============== DAY TABS ============== */
+  .day-tabs {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 6px 2px 12px;
+    margin-bottom: 20px;
+    scrollbar-width: thin;
+  }
+
+  .day-tab {
+    flex-shrink: 0;
+    background: rgba(255, 252, 244, 0.8);
+    border: 1px solid rgba(184, 84, 49, 0.2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: all 0.25s;
+    min-width: 76px;
+    text-align: center;
+  }
+
+  .day-tab:hover {
+    border-color: var(--terracotta);
+    transform: translateY(-2px);
+  }
+
+  .day-tab.active {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+    color: var(--papyrus);
+    box-shadow: 0 4px 12px rgba(184, 84, 49, 0.35);
+  }
+
+  .day-tab .d-num {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    opacity: 0.7;
+  }
+
+  .day-tab .d-date {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  .day-tab.all-route {
+    background: var(--nile);
+    border-color: var(--nile);
+    color: var(--papyrus);
+  }
+
+  .day-tab.all-route .d-num,
+  .day-tab.all-route .d-date { opacity: 1; }
+
+  /* ============== DAY CONTENT ============== */
+  .day-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 900px) {
+    .day-layout { grid-template-columns: 1fr; }
+  }
+
+  .day-info {
+    background: rgba(255, 252, 244, 0.8);
+    border: 1px solid rgba(184, 84, 49, 0.18);
+    border-radius: 10px;
+    padding: 22px;
+  }
+
+  .day-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--hieroglyph);
+    margin-bottom: 4px;
+  }
+
+  .day-route {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--nile);
+    font-size: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed rgba(184, 84, 49, 0.3);
+  }
+
+  .info-block {
+    margin-bottom: 16px;
+  }
+
+  .info-block h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--terracotta);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .info-block ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .info-block li {
+    padding: 6px 0 6px 18px;
+    position: relative;
+    font-size: 14px;
+    color: #2a1f12;
+  }
+
+  .info-block li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 9px;
+    top: 11px;
+  }
+
+  /* Highlight list items with map numbers */
+  .info-block li.with-num {
+    padding-left: 34px;
+  }
+  .info-block li.with-num::before { display: none; }
+  .info-block li .site-num {
+    position: absolute;
+    left: 0;
+    top: 7px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: var(--terracotta);
+    color: var(--papyrus);
+    border-radius: 50%;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 700;
+    box-shadow: 0 2px 4px rgba(138, 58, 31, 0.3);
+  }
+
+  .info-block li.clickable-site {
+    cursor: pointer;
+    transition: background 0.2s, padding-left 0.2s;
+    border-radius: 4px;
+  }
+  .info-block li.clickable-site:hover {
+    background: rgba(184, 84, 49, 0.08);
+    padding-left: 38px;
+  }
+
+  .meals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .meal {
+    background: var(--papyrus);
+    border: 1px solid rgba(184, 84, 49, 0.15);
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .meal .m-label {
+    font-size: 10px;
+    color: var(--nile);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .meal .m-content {
+    font-size: 12px;
+    color: var(--hieroglyph);
+    line-height: 1.4;
+  }
+
+  .hotel-tag {
+    background: linear-gradient(90deg, rgba(45, 106, 126, 0.1), transparent);
+    border-left: 3px solid var(--nile);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--hieroglyph);
+  }
+
+  .hotel-tag strong { color: var(--nile-deep); }
+
+  /* ============== OPTIONAL ACTIVITIES ============== */
+  .opt-activity {
+    background: linear-gradient(135deg, rgba(200, 155, 58, 0.12), rgba(184, 84, 49, 0.06));
+    border: 1px solid rgba(200, 155, 58, 0.4);
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+
+  .opt-activity .opt-name {
+    font-weight: 600;
+    color: var(--terracotta-deep);
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .opt-activity .opt-price {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 12px;
+  }
+
+  .opt-activity .opt-desc {
+    font-size: 11px;
+    color: #5a4a35;
+    margin-top: 3px;
+  }
+
+  /* ============== MAP ============== */
+  .map-wrapper {
+    position: relative;
+    height: 100%;
+    min-height: 550px;
+  }
+
+  #map {
+    height: 100%;
+    min-height: 550px;
+    border-radius: 10px;
+    border: 2px solid rgba(184, 84, 49, 0.25);
+    box-shadow: 0 8px 24px var(--shadow-soft);
+    background: var(--papyrus-dark);
+  }
+
+  .map-legend {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(243, 233, 210, 0.95);
+    backdrop-filter: blur(4px);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    color: var(--hieroglyph);
+    border: 1px solid rgba(184, 84, 49, 0.3);
+    z-index: 400;
+    max-width: 200px;
+  }
+
+  .map-legend .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 2px 0;
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1.5px solid #f3e9d2;
+  }
+
+  .leaflet-popup-content-wrapper {
+    background: var(--papyrus);
+    color: var(--hieroglyph);
+    border-radius: 8px;
+    border: 1px solid var(--terracotta);
+    font-family: 'Noto Sans TC', sans-serif;
+    box-shadow: 0 8px 20px rgba(42, 31, 18, 0.3);
+  }
+  .leaflet-popup-content {
+    margin: 12px 14px;
+    min-width: 220px;
+    max-width: 280px;
+  }
+  .leaflet-popup-tip { background: var(--terracotta); }
+
+  .map-popup-title {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 700;
+    color: var(--terracotta-deep);
+    font-size: 15px;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .map-popup-day {
+    font-size: 11px;
+    color: var(--nile);
+    font-weight: 600;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.1em;
+  }
+  .map-popup-era {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--papyrus);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-top: 6px;
+  }
+  .map-popup-desc {
+    font-size: 12px;
+    margin-top: 8px;
+    color: #2a1f12;
+    line-height: 1.5;
+  }
+  .map-popup-tip {
+    font-size: 11px;
+    margin-top: 8px;
+    padding: 6px 8px;
+    background: rgba(200, 155, 58, 0.15);
+    border-left: 2px solid var(--gold);
+    color: #5a4a35;
+    border-radius: 3px;
+  }
+
+  /* ============== TIPS / INSIGHT ============== */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  .tip-card {
+    background: rgba(255, 252, 244, 0.85);
+    border: 1px solid rgba(184, 84, 49, 0.2);
+    border-radius: 10px;
+    padding: 18px;
+    border-top: 3px solid var(--terracotta);
+    transition: all 0.3s;
+  }
+
+  .tip-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px var(--shadow-soft);
+  }
+
+  .tip-card.gold { border-top-color: var(--gold); }
+  .tip-card.nile { border-top-color: var(--nile); }
+  .tip-card.danger { border-top-color: #c0392b; background: rgba(192, 57, 43, 0.05); }
+
+  .tip-card h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 17px;
+    color: var(--hieroglyph);
+    margin-bottom: 10px;
+  }
+
+  .tip-card p {
+    font-size: 13px;
+    color: #2a1f12;
+    margin-bottom: 6px;
+  }
+
+  .tip-card .icon {
+    font-size: 22px;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  /* ============== WEATHER TABLE ============== */
+  .weather-table {
+    width: 100%;
+    background: rgba(255, 252, 244, 0.85);
+    border: 1px solid rgba(184, 84, 49, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    border-collapse: collapse;
+  }
+
+  .weather-table th, .weather-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(184, 84, 49, 0.1);
+    font-size: 13px;
+  }
+
+  .weather-table th {
+    background: var(--terracotta);
+    color: var(--papyrus);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .weather-table tr:hover td { background: rgba(184, 84, 49, 0.04); }
+
+  .temp-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 12px;
+  }
+  .temp-cool { background: rgba(45, 106, 126, 0.15); color: var(--nile-deep); }
+  .temp-warm { background: rgba(217, 185, 122, 0.3); color: var(--terracotta-deep); }
+  .temp-hot { background: rgba(184, 84, 49, 0.2); color: var(--terracotta-deep); }
+
+  /* ============== PACKING LIST ============== */
+  .packing-controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+
+  .progress-bar {
+    flex: 1;
+    min-width: 200px;
+    height: 12px;
+    background: rgba(184, 84, 49, 0.15);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--terracotta));
+    transition: width 0.4s ease;
+    border-radius: 6px;
+  }
+
+  .progress-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--hieroglyph);
+    white-space: nowrap;
+  }
+
+  .reset-btn {
+    background: transparent;
+    border: 1px solid var(--terracotta);
+    color: var(--terracotta);
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+
+  .reset-btn:hover { background: var(--terracotta); color: var(--papyrus); }
+
+  .packing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .pack-cat {
+    background: rgba(255, 252, 244, 0.85);
+    border: 1px solid rgba(184, 84, 49, 0.2);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .pack-cat h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    color: var(--terracotta-deep);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(184, 84, 49, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pack-cat h3 .cat-count {
+    margin-left: auto;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: var(--nile);
+    font-weight: 500;
+  }
+
+  .pack-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.2s;
+  }
+
+  .pack-item input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--terracotta);
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    background: var(--papyrus);
+    transition: all 0.2s;
+  }
+
+  .pack-item input[type="checkbox"]:checked {
+    background: var(--terracotta);
+  }
+
+  .pack-item input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    color: var(--papyrus);
+    font-weight: bold;
+    font-size: 13px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .pack-item span {
+    font-size: 14px;
+    color: var(--hieroglyph);
+    flex: 1;
+  }
+
+  .pack-item.checked span {
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+
+  .pack-item .del-btn {
+    background: none;
+    border: none;
+    color: #c0392b;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 14px;
+    padding: 0 4px;
+  }
+
+  .pack-item:hover .del-btn { opacity: 1; }
+
+  .add-item-form {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(184, 84, 49, 0.2);
+  }
+
+  .add-item-form input {
+    flex: 1;
+    padding: 6px 10px;
+    border: 1px solid rgba(184, 84, 49, 0.3);
+    border-radius: 4px;
+    background: var(--papyrus);
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--hieroglyph);
+  }
+
+  .add-item-form input:focus {
+    outline: none;
+    border-color: var(--terracotta);
+  }
+
+  .add-item-form button {
+    background: var(--terracotta);
+    color: var(--papyrus);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: inherit;
+    transition: background 0.2s;
+  }
+
+  .add-item-form button:hover { background: var(--terracotta-deep); }
+
+  /* ============== CONTACT CARD ============== */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 14px;
+  }
+
+  .contact-card {
+    background: linear-gradient(135deg, rgba(45, 106, 126, 0.08), rgba(45, 106, 126, 0.02));
+    border: 1px solid var(--nile);
+    border-radius: 10px;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle at top right, rgba(45, 106, 126, 0.15), transparent);
+    border-radius: 50%;
+    transform: translate(20px, -20px);
+  }
+
+  .contact-card .c-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--nile);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .contact-card .c-name {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--hieroglyph);
+    margin-bottom: 6px;
+  }
+
+  .contact-card .c-detail {
+    font-size: 13px;
+    color: #5a4a35;
+    line-height: 1.6;
+  }
+
+  .contact-card .c-phone {
+    display: inline-block;
+    background: var(--nile);
+    color: var(--papyrus);
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-top: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .contact-card .c-phone:hover { background: var(--nile-deep); transform: scale(1.05); }
+
+  /* ============== HISTORY TIMELINE ============== */
+  .history-container {
+    background: rgba(255, 252, 244, 0.85);
+    border: 1px solid rgba(184, 84, 49, 0.25);
+    border-radius: 12px;
+    padding: 20px;
+    overflow-x: auto;
+  }
+
+  .history-intro {
+    font-size: 14px;
+    color: #2a1f12;
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    background: linear-gradient(90deg, rgba(200, 155, 58, 0.12), transparent);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+  }
+
+  .timeline-scroll {
+    min-width: 900px;
+    padding: 20px 10px 40px;
+    position: relative;
+  }
+
+  .timeline-axis {
+    position: relative;
+    height: 4px;
+    background: linear-gradient(90deg,
+      #8B4513 0%,
+      #a05a2a 12%,
+      #b85431 28%,
+      #c89b3a 45%,
+      #d9b97a 65%,
+      #2d6a7e 82%,
+      #1d4a5a 100%);
+    border-radius: 2px;
+    margin: 80px 0 0;
+  }
+
+  .era-block {
+    position: absolute;
+    top: -70px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    color: var(--papyrus);
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .era-block::after {
+    content: '';
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 12px;
+    background: inherit;
+  }
+
+  .era-pre { background: #8B4513; left: 0%; width: 8%; }
+  .era-early { background: #a05a2a; left: 8%; width: 8%; }
+  .era-old { background: #b85431; left: 16%; width: 14%; }
+  .era-mid { background: #d9b97a; color: #2a1f12; left: 30%; width: 10%; }
+  .era-new { background: #c89b3a; left: 40%; width: 18%; }
+  .era-late { background: #a05a2a; left: 58%; width: 8%; }
+  .era-ptolemy { background: #2d6a7e; left: 66%; width: 9%; }
+  .era-roman { background: #5a4a35; left: 75%; width: 8%; }
+  .era-islamic { background: #1d4a5a; left: 83%; width: 17%; }
+
+  .timeline-year {
+    position: absolute;
+    top: 12px;
+    font-size: 10px;
+    color: #5a4a35;
+    font-family: 'Cinzel', serif;
+    transform: translateX(-50%);
+  }
+
+  .timeline-marker {
+    position: absolute;
+    top: -8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--papyrus);
+    border: 3px solid var(--terracotta);
+    transform: translateX(-50%);
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 5;
+  }
+
+  .timeline-marker:hover {
+    transform: translateX(-50%) scale(1.4);
+    box-shadow: 0 4px 12px rgba(184, 84, 49, 0.5);
+  }
+
+  .timeline-marker.king { border-color: var(--gold); }
+  .timeline-marker.site { border-color: var(--nile); }
+
+  .timeline-label {
+    position: absolute;
+    font-size: 11px;
+    color: var(--hieroglyph);
+    font-weight: 500;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    background: rgba(243, 233, 210, 0.9);
+    padding: 2px 6px;
+    border-radius: 3px;
+    pointer-events: none;
+  }
+
+  .timeline-label.top { top: 25px; }
+  .timeline-label.bottom { top: 40px; }
+  .timeline-label.bottom2 { top: 60px; }
+
+  .timeline-label.king-label {
+    color: var(--terracotta-deep);
+    font-weight: 700;
+    border: 1px solid var(--gold);
+  }
+  .timeline-label.site-label {
+    color: var(--nile-deep);
+    border: 1px solid var(--nile);
+  }
+
+  .site-day-badge {
+    display: inline-block;
+    background: var(--terracotta);
+    color: var(--papyrus);
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 2px;
+    margin-left: 4px;
+    font-weight: 700;
+  }
+
+  .timeline-legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed rgba(184, 84, 49, 0.3);
+    font-size: 12px;
+    color: #2a1f12;
+  }
+
+  .timeline-legend .leg-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .timeline-legend .leg-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--papyrus);
+    border: 2px solid;
+  }
+
+  /* ============== FOOTER ============== */
+  footer {
+    text-align: center;
+    padding: 40px 16px;
+    color: var(--nile-deep);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    border-top: 1px solid rgba(184, 84, 49, 0.2);
+    margin-top: 40px;
+  }
+
+  footer .glyph {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.5em;
+    color: var(--terracotta);
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--papyrus-dark); }
+  ::-webkit-scrollbar-thumb { background: var(--terracotta); border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--terracotta-deep); }
+
+  .hidden { display: none !important; }
+
+  /* Photo tips */
+  .photo-tip {
+    background: linear-gradient(135deg, rgba(200, 155, 58, 0.15), rgba(200, 155, 58, 0.03));
+    border-left: 3px solid var(--gold);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-top: 8px;
+    color: var(--hieroglyph);
+  }
+
+  .photo-tip strong { color: var(--gold); }
+
+  /* Mobile tweaks */
+  @media (max-width: 600px) {
+    main { padding: 20px 12px 60px; }
+    section { margin-bottom: 40px; }
+    .day-info { padding: 16px; }
+    .meals-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 30px; }
+    header { padding: 40px 16px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hero-tag">— SETTOUR · 2026.04.29 - 05.09 —</div>
+  <h1>埃及古文明<br><span class="accent">尼羅河探險</span> · 11日</h1>
+  <p class="hero-sub">穿越四千年文明 · 從金字塔到紅海碧波</p>
+  <div class="hero-meta">
+    <span>🗓 <strong>4/29 (三) ~ 5/9 (六)</strong></span>
+    <span>✈️ 阿聯酋航空 EK367</span>
+    <span>👨‍✈️ 領隊 賴彥良</span>
+    <span>📞 0981-564717</span>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="nav-btn active" data-target="overview">總覽</button>
+    <button class="nav-btn" data-target="itinerary">每日行程</button>
+    <button class="nav-btn" data-target="history">埃及歷史</button>
+    <button class="nav-btn" data-target="weather">天氣穿搭</button>
+    <button class="nav-btn" data-target="tips">當地實用</button>
+    <button class="nav-btn" data-target="packing">行李清單</button>
+    <button class="nav-btn" data-target="contact">緊急聯絡</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- =============== OVERVIEW =============== -->
+  <section id="overview">
+    <div class="section-head">
+      <span class="section-num">01 / OVERVIEW</span>
+      <h2>旅程關鍵數字</h2>
+      <span class="section-tag">— at a glance</span>
+    </div>
+    <div class="overview-grid">
+      <div class="ov-card">
+        <div class="label">總天數</div>
+        <div class="value">11 天</div>
+        <div class="desc">含去回程，5/8 晚從開羅起飛，5/9 下午回台</div>
+      </div>
+      <div class="ov-card">
+        <div class="label">時差</div>
+        <div class="value">－6 小時</div>
+        <div class="desc">開羅比台灣慢 6 小時 (杜拜慢 4 小時)</div>
+      </div>
+      <div class="ov-card">
+        <div class="label">貨幣</div>
+        <div class="value">1 USD ≈ 50 EGP</div>
+        <div class="desc">建議換 30-50 美金等值的埃磅做小額支付</div>
+      </div>
+      <div class="ov-card">
+        <div class="label">電壓</div>
+        <div class="value">220V</div>
+        <div class="desc">歐規雙圓孔 (豬鼻子)，旅行社提供轉接頭</div>
+      </div>
+      <div class="ov-card">
+        <div class="label">小費</div>
+        <div class="value">$40 USD</div>
+        <div class="desc">領隊代收。另含每日 $12 USD 領隊/導遊/司機服務費</div>
+      </div>
+      <div class="ov-card">
+        <div class="label">託運行李</div>
+        <div class="value">23 kg × 2</div>
+        <div class="desc">國際段 2 件，國內段限 1 件 (建議出發以 1 件為主)</div>
+      </div>
+      <div class="ov-card">
+        <div class="label">氣溫範圍</div>
+        <div class="value">15 ~ 38°C</div>
+        <div class="desc">日夜溫差大，短袖+薄外套+防風外套都需要</div>
+      </div>
+      <div class="ov-card">
+        <div class="label">飲食特色</div>
+        <div class="value">無豬肉</div>
+        <div class="desc">伊斯蘭飲食，以牛、羊、雞、魚為主</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== ITINERARY =============== -->
+  <section id="itinerary">
+    <div class="section-head">
+      <span class="section-num">02 / DAY-BY-DAY</span>
+      <h2>每日行程</h2>
+      <span class="section-tag">— 點選天數查看詳情 · 景點可點開</span>
+    </div>
+
+    <div class="day-tabs" id="dayTabs"></div>
+
+    <div class="day-layout">
+      <div class="day-info" id="dayInfo"></div>
+      <div class="map-wrapper">
+        <div id="map"></div>
+        <div class="map-legend" id="mapLegend"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== HISTORY TIMELINE =============== -->
+  <section id="history">
+    <div class="section-head">
+      <span class="section-num">03 / TIMELINE</span>
+      <h2>埃及歷史時間軸</h2>
+      <span class="section-tag">— 一張圖看懂 5000 年文明</span>
+    </div>
+
+    <div class="history-container">
+      <div class="history-intro">
+        💡 <strong>怎麼看這張圖：</strong>橫軸是時間 (從左 BC 5000 到右 AD 2000)，上方深色色塊是各個歷史時期，軸下方金色圓點是重要法老/君王，下方藍色圓點是我們這次會參觀的景點。<strong>滑鼠移上圓點可以看詳細介紹。</strong>
+      </div>
+
+      <div class="timeline-scroll">
+        <div class="timeline-axis">
+          <!-- Era blocks (above axis) -->
+          <div class="era-block era-pre">前王朝<br><span style="font-size:9px">5000-3100 BC</span></div>
+          <div class="era-block era-early">早王朝<br><span style="font-size:9px">3100-2686 BC</span></div>
+          <div class="era-block era-old">古王國<br><span style="font-size:9px">2686-2181 BC</span><br><span style="font-size:9px">(金字塔時代)</span></div>
+          <div class="era-block era-mid">中王國<br><span style="font-size:9px">2040-1786 BC</span></div>
+          <div class="era-block era-new">新王國<br><span style="font-size:9px">1567-1085 BC</span><br><span style="font-size:9px">(最強盛)</span></div>
+          <div class="era-block era-late">後王朝<br><span style="font-size:9px">667-332 BC</span></div>
+          <div class="era-block era-ptolemy">托勒密<br><span style="font-size:9px">305-30 BC</span></div>
+          <div class="era-block era-roman">羅馬<br><span style="font-size:9px">30 BC-641</span></div>
+          <div class="era-block era-islamic">伊斯蘭時期<br><span style="font-size:9px">641 - 現今</span></div>
+
+          <!-- Year markers -->
+          <div class="timeline-year" style="left: 0%">5000 BC</div>
+          <div class="timeline-year" style="left: 30%">2000 BC</div>
+          <div class="timeline-year" style="left: 50%">1500 BC</div>
+          <div class="timeline-year" style="left: 66%">500 BC</div>
+          <div class="timeline-year" style="left: 71.4%">0</div>
+          <div class="timeline-year" style="left: 83%">1000 AD</div>
+          <div class="timeline-year" style="left: 100%">2000 AD</div>
+
+          <!-- Kings (gold markers above line, labels below) -->
+          <div class="timeline-marker king" style="left: 22%" title="古夫王"></div>
+          <div class="timeline-label top king-label" style="left: 22%">古夫王 Khufu<br><span style="font-size:9px">約 2570 BC</span></div>
+
+          <div class="timeline-marker king" style="left: 51%" title="哈姬蘇女法老"></div>
+          <div class="timeline-label bottom2 king-label" style="left: 51%">哈姬蘇女法老<br><span style="font-size:9px">約 1479 BC</span></div>
+
+          <div class="timeline-marker king" style="left: 53%" title="圖坦卡門"></div>
+          <div class="timeline-label top king-label" style="left: 53%">圖坦卡門<br><span style="font-size:9px">約 1333 BC</span></div>
+
+          <div class="timeline-marker king" style="left: 55.5%" title="拉美西斯二世"></div>
+          <div class="timeline-label bottom2 king-label" style="left: 55.5%">拉美西斯二世 ⭐<br><span style="font-size:9px">約 1279 BC</span></div>
+
+          <div class="timeline-marker king" style="left: 70%" title="克麗奧佩特拉七世"></div>
+          <div class="timeline-label top king-label" style="left: 70%">埃及艷后<br><span style="font-size:9px">約 51 BC</span></div>
+
+          <div class="timeline-marker king" style="left: 85%" title="薩拉丁"></div>
+          <div class="timeline-label top king-label" style="left: 85%">薩拉丁大帝<br><span style="font-size:9px">1171 AD</span></div>
+
+          <div class="timeline-marker king" style="left: 88.5%" title="穆罕默德·阿里"></div>
+          <div class="timeline-label bottom2 king-label" style="left: 88.5%">穆罕默德·阿里<br><span style="font-size:9px">1805 AD</span></div>
+
+          <!-- Sites (blue markers below line) -->
+          <div class="timeline-marker site" style="left: 22%; top: 12px;" title="金字塔"></div>
+          <div class="timeline-label bottom site-label" style="left: 22%; top: 42px">吉薩金字塔<span class="site-day-badge">D9</span></div>
+
+          <div class="timeline-marker site" style="left: 47%; top: 12px;" title="卡納克神廟"></div>
+          <div class="timeline-label bottom site-label" style="left: 47%; top: 42px">卡納克神廟<span class="site-day-badge">D6</span></div>
+
+          <div class="timeline-marker site" style="left: 49%; top: 12px;" title="路克索神殿"></div>
+          <div class="timeline-label bottom site-label" style="left: 49%; top: 62px">路克索神殿<span class="site-day-badge">D5</span></div>
+
+          <div class="timeline-marker site" style="left: 51.5%; top: 12px;" title="帝王谷"></div>
+          <div class="timeline-label bottom site-label" style="left: 51.5%; top: 82px">帝王谷<span class="site-day-badge">D6</span></div>
+
+          <div class="timeline-marker site" style="left: 55.5%; top: 12px;" title="阿布辛貝神殿"></div>
+          <div class="timeline-label bottom site-label" style="left: 55.5%; top: 102px">阿布辛貝神殿<span class="site-day-badge">D4</span></div>
+
+          <div class="timeline-marker site" style="left: 57%; top: 12px;" title="曼儂巨像"></div>
+          <div class="timeline-label bottom site-label" style="left: 57%; top: 122px">曼儂巨像<span class="site-day-badge">D6</span></div>
+
+          <div class="timeline-marker site" style="left: 67%; top: 12px;" title="艾德福神殿"></div>
+          <div class="timeline-label bottom site-label" style="left: 67%; top: 42px">艾德福神殿<span class="site-day-badge">D5</span></div>
+
+          <div class="timeline-marker site" style="left: 68%; top: 12px;" title="康孟波神殿"></div>
+          <div class="timeline-label bottom site-label" style="left: 68%; top: 62px">康孟波神殿<span class="site-day-badge">D4</span></div>
+
+          <div class="timeline-marker site" style="left: 69%; top: 12px;" title="菲萊神殿"></div>
+          <div class="timeline-label bottom site-label" style="left: 69%; top: 82px">菲萊神殿 (自費)</div>
+
+          <div class="timeline-marker site" style="left: 82%; top: 12px;" title="懸吊教堂"></div>
+          <div class="timeline-label bottom site-label" style="left: 82%; top: 42px">懸吊教堂<span class="site-day-badge">D9</span></div>
+
+          <div class="timeline-marker site" style="left: 85%; top: 12px;" title="薩拉丁古城堡"></div>
+          <div class="timeline-label bottom site-label" style="left: 85%; top: 62px">薩拉丁古城堡<span class="site-day-badge">D2</span></div>
+
+          <div class="timeline-marker site" style="left: 86%; top: 12px;" title="哈利利市集"></div>
+          <div class="timeline-label bottom site-label" style="left: 86%; top: 82px">哈利利市集<span class="site-day-badge">D8</span></div>
+
+          <div class="timeline-marker site" style="left: 88.5%; top: 12px;" title="穆罕默德·阿里清真寺"></div>
+          <div class="timeline-label bottom site-label" style="left: 88.5%; top: 102px">阿里清真寺<span class="site-day-badge">D2</span></div>
+
+          <div class="timeline-marker site" style="left: 93%; top: 12px;" title="亞斯文大水壩"></div>
+          <div class="timeline-label bottom site-label" style="left: 93%; top: 42px">亞斯文大水壩<span class="site-day-badge">D3</span></div>
+
+          <div class="timeline-marker site" style="left: 98%; top: 12px;" title="大埃及博物館"></div>
+          <div class="timeline-label bottom site-label" style="left: 98%; top: 62px">大埃及博物館<span class="site-day-badge">D9</span></div>
+        </div>
+
+        <div class="timeline-legend">
+          <div class="leg-item"><span class="leg-dot" style="border-color: var(--gold)"></span>重要法老 / 君王</div>
+          <div class="leg-item"><span class="leg-dot" style="border-color: var(--nile)"></span>本次造訪景點</div>
+          <div class="leg-item"><span class="site-day-badge">D?</span>該景點所屬旅遊天數</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 20px; padding: 14px; background: rgba(45, 106, 126, 0.06); border-radius: 8px; font-size: 13px; color: #2a1f12;">
+        <strong style="color: var(--terracotta-deep);">📖 三個重要觀察：</strong>
+        <ol style="padding-left: 20px; margin-top: 8px; line-height: 1.8;">
+          <li><strong>金字塔超古老：</strong>古夫金字塔 (2570 BC) 建造時，其他神殿都還沒蓋！比拉美西斯二世還早 1300 年。</li>
+          <li><strong>神殿都在新王國時期：</strong>卡納克、路克索、阿布辛貝都在新王國建造，是埃及最強盛的時期，法老有財力蓋大型建築。</li>
+          <li><strong>艾德福/康孟波/菲萊是希臘化時期的：</strong>這三座神殿是托勒密王朝 (希臘人統治) 建的，所以保存最完整，年代也最「年輕」。</li>
+          <li><strong>開羅的清真寺和市集都是伊斯蘭時期的：</strong>阿里清真寺是 1830 年、哈利利市集 1382 年、薩拉丁城堡 1176 年，比古埃及晚了 3000 年以上。</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== WEATHER & DRESS =============== -->
+  <section id="weather">
+    <div class="section-head">
+      <span class="section-num">04 / CLIMATE</span>
+      <h2>天氣與穿搭對照</h2>
+      <span class="section-tag">— 出發前 3 天領隊會發布精準預報</span>
+    </div>
+    <table class="weather-table">
+      <thead>
+        <tr><th>地區 / 日期</th><th>預估氣溫</th><th>建議穿著</th><th>備註</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>開羅 Cairo</strong><br>D2, D8, D9</td>
+          <td><span class="temp-pill temp-warm">20-34°C</span></td>
+          <td>短袖 + 長褲 + 薄外套</td>
+          <td>參觀清真寺需穿長褲</td>
+        </tr>
+        <tr>
+          <td><strong>亞斯文 Aswan</strong><br>D3, D4</td>
+          <td><span class="temp-pill temp-hot">24-38°C</span></td>
+          <td>短袖 + 防曬帽 + 太陽眼鏡</td>
+          <td>南部最熱，補水重要</td>
+        </tr>
+        <tr>
+          <td><strong>阿布辛貝 Abu Simbel</strong><br>D4 凌晨</td>
+          <td><span class="temp-pill temp-cool">15-22°C</span></td>
+          <td>短袖 + <strong>防風外套</strong></td>
+          <td>凌晨出發很冷，務必帶外套</td>
+        </tr>
+        <tr>
+          <td><strong>尼羅河遊輪</strong><br>D3-D5</td>
+          <td><span class="temp-pill temp-warm">20-32°C</span></td>
+          <td>短袖 + 泳衣 + 薄長褲</td>
+          <td>晚上參觀神殿要薄外套</td>
+        </tr>
+        <tr>
+          <td><strong>路克索 Luxor</strong><br>D5-D6</td>
+          <td><span class="temp-pill temp-hot">22-36°C</span></td>
+          <td>短袖 + 防曬 + 口罩</td>
+          <td>馬車去神殿建議戴口罩防風沙</td>
+        </tr>
+        <tr>
+          <td><strong>胡加達 Hurghada</strong><br>D6-D8</td>
+          <td><span class="temp-pill temp-warm">22-30°C</span></td>
+          <td>泳裝 + 短袖 + 拖鞋</td>
+          <td>紅海度假，可放鬆穿著</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- =============== LOCAL TIPS =============== -->
+  <section id="tips">
+    <div class="section-head">
+      <span class="section-num">05 / SURVIVAL GUIDE</span>
+      <h2>當地實用須知</h2>
+      <span class="section-tag">— 出門前讀過心安</span>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card danger">
+        <span class="icon">🚫</span>
+        <h3>嚴格禁止</h3>
+        <p><strong>空拍機：</strong>埃及絕對禁止，金字塔區一旦發現直接沒收，不會歸還。</p>
+        <p><strong>電子菸：</strong>埃及可用，但台灣海關禁止攜回。</p>
+        <p><strong>含肉製品：</strong>調理包、肉乾、含真空肉包泡麵都禁止 (僅含調味粉的泡麵可以)。</p>
+        <p><strong>無線電棒夾：</strong>不論託運或隨身都不可帶，僅限插電式。</p>
+      </div>
+
+      <div class="tip-card gold">
+        <span class="icon">💵</span>
+        <h3>美金準備</h3>
+        <p><strong>新版美金：</strong>必須是無頭像外框的新版美金，不可有破損或汙損。</p>
+        <p><strong>1 元零鈔：</strong>多換一些 1 美金，方便給小費 (廁所、行李、床頭)。</p>
+        <p><strong>建議現金：</strong>每人換 30-50 美金等值的埃磅 (主要付廁所費 10-30 EGP)。</p>
+        <p><strong>信用卡：</strong>大型商店與博物館可用 Visa/Mastercard，市集建議用現金。</p>
+      </div>
+
+      <div class="tip-card nile">
+        <span class="icon">📶</span>
+        <h3>網路通訊</h3>
+        <p><strong>首次入境：</strong>可請助理代購實體 SIM 卡 (30GB 約 25 USD)。</p>
+        <p><strong>非首次入境：</strong>務必在台灣先買 eSIM 或開漫遊 (當地 SIM 卡可能鎖機)。</p>
+        <p><strong>河輪 Wi-Fi：</strong>無免費 Wi-Fi 且訊號不穩，建議預先下載影片/音樂。</p>
+        <p><strong>領隊代購：</strong>需要可請領隊統計人數協助。</p>
+      </div>
+
+      <div class="tip-card">
+        <span class="icon">🛍️</span>
+        <h3>購物殺價</h3>
+        <p><strong>哈利利市集：</strong>非標價地區，從 <strong>3-5 折</strong>開始殺。</p>
+        <p><strong>不喜歡殺價：</strong>找有明碼標價的店家。</p>
+        <p><strong>推薦特產：</strong>香精油、莎草紙畫、椰棗、Hibiscus 茶、紙莎草書籤。</p>
+        <p><strong>頭巾：</strong>建議在台灣先買，當地觀光區較貴。</p>
+      </div>
+
+      <div class="tip-card gold">
+        <span class="icon">🍽️</span>
+        <h3>飲食提醒</h3>
+        <p><strong>無豬肉：</strong>全程伊斯蘭料理，以牛、羊、雞、魚為主。</p>
+        <p><strong>口味單調：</strong>多為燒烤或燉煮，建議帶<strong>泡麵 + 台灣零食</strong>。</p>
+        <p><strong>飲水：</strong>飯店供水、河輪可索熱水。可在當地超市買瓶裝水 (便宜)。</p>
+        <p><strong>第二天超市：</strong>領隊會安排在加油站超市採買。</p>
+      </div>
+
+      <div class="tip-card nile">
+        <span class="icon">💊</span>
+        <h3>個人健康</h3>
+        <p><strong>必備藥品：</strong>腸胃藥、止痛藥、暈車藥、感冒藥。</p>
+        <p><strong>暈車：</strong>D6 胡加達車程 4-5 小時、D8 開羅車程 6 小時，易暈者備妥。</p>
+        <p><strong>防曬：</strong>SPF50 防曬乳 + 太陽眼鏡 + 帽子，缺一不可。</p>
+        <p><strong>保濕：</strong>氣候極乾，乳液 + 護唇膏必備。</p>
+      </div>
+
+      <div class="tip-card">
+        <span class="icon">🕌</span>
+        <h3>清真寺禮儀</h3>
+        <p><strong>長褲必須：</strong>D2 阿里清真寺，務必穿長褲。</p>
+        <p><strong>頭巾不強制：</strong>但若想戴可在台灣先準備。</p>
+        <p><strong>進入需脫鞋：</strong>建議穿好穿脫的鞋。</p>
+        <p><strong>保持安靜：</strong>祈禱室內勿大聲喧嘩。</p>
+      </div>
+
+      <div class="tip-card danger">
+        <span class="icon">🧳</span>
+        <h3>行李重要規則</h3>
+        <p><strong>國內段限 1 件：</strong>D3 飛亞斯文，多餘行李可寄存開羅飯店 (回程取)。</p>
+        <p><strong>行動電源：</strong>限 2 顆，必須清楚標示電容量，務必<strong>隨身</strong>。</p>
+        <p><strong>液體 100ml：</strong>單瓶不超過，總計 1L 透明袋。</p>
+        <p><strong>打火機：</strong>只能 1 個傳統型 (非防風)，隨身放置。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== PACKING LIST =============== -->
+  <section id="packing">
+    <div class="section-head">
+      <span class="section-num">06 / PACKING</span>
+      <h2>埃及行李清單</h2>
+      <span class="section-tag">— 點擊勾選，自動儲存</span>
+    </div>
+
+    <div class="packing-controls">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <span class="progress-text" id="progressText">0 / 0 (0%)</span>
+      <button class="reset-btn" id="resetBtn">重置全部</button>
+    </div>
+
+    <div class="packing-grid" id="packingGrid"></div>
+  </section>
+
+  <!-- =============== CONTACT =============== -->
+  <section id="contact">
+    <div class="section-head">
+      <span class="section-num">07 / CONTACTS</span>
+      <h2>緊急聯絡資訊</h2>
+      <span class="section-tag">— 截圖存到手機相簿</span>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="c-label">領隊</div>
+        <div class="c-name">賴彥良 啦啦</div>
+        <div class="c-detail">參團旅客專屬 LINE 群組</div>
+        <a href="tel:+886981564717" class="c-phone">📞 0981-564717</a>
+      </div>
+
+      <div class="contact-card">
+        <div class="c-label">送機協助</div>
+        <div class="c-name">桃園二航廈代表號</div>
+        <div class="c-detail">主要協助報到手續，行程問題請洽客服</div>
+        <a href="tel:+886988236335" class="c-phone">📞 0988-236335</a>
+        <a href="tel:+886905510768" class="c-phone" style="margin-left:6px">📞 0905-510768</a>
+      </div>
+
+      <div class="contact-card">
+        <div class="c-label">急難救助</div>
+        <div class="c-name">旅外國人急難救助</div>
+        <div class="c-detail">台灣外交部 24 小時免付費專線 (海外可撥)</div>
+        <a href="tel:+800088508850" class="c-phone">📞 800-0885-0885</a>
+      </div>
+
+      <div class="contact-card">
+        <div class="c-label">防詐騙</div>
+        <div class="c-name">165 反詐騙專線</div>
+        <div class="c-detail">本公司不會以任何名義要求個資/帳號，有疑問請查證</div>
+        <a href="tel:165" class="c-phone">📞 165</a>
+      </div>
+
+      <div class="contact-card">
+        <div class="c-label">飯店 — 開羅</div>
+        <div class="c-name">Pyramids Park Resort</div>
+        <div class="c-detail">D2, D8, D9 入住 (金字塔對面)</div>
+        <a href="tel:+20238388300" class="c-phone">📞 +20 2 38388300</a>
+      </div>
+
+      <div class="contact-card">
+        <div class="c-label">飯店 — 胡加達</div>
+        <div class="c-name">Movenpick SomaBay</div>
+        <div class="c-detail">D6, D7 入住 (紅海海邊)</div>
+        <a href="tel:+20653260850" class="c-phone">📞 +20 65 3260850</a>
+      </div>
+
+      <div class="contact-card">
+        <div class="c-label">河輪</div>
+        <div class="c-name">M/S Princess Sara Nile Cruise</div>
+        <div class="c-detail">D3, D4, D5 入住 (亞斯文 → 路克索)</div>
+        <span class="c-detail" style="display:block;margin-top:6px">無 Wi-Fi · 可向櫃台索取熱水</span>
+      </div>
+
+      <div class="contact-card">
+        <div class="c-label">護照效期</div>
+        <div class="c-name">⚠️ 2026/11/01 之後</div>
+        <div class="c-detail">出發前務必確認護照效期</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="glyph">𓂀  𓊪  𓏏  𓇯  𓇳  𓆣  𓋹</div>
+  <p>願阿努比斯指引你的旅程 · Have a wonderful trip, 芝芝</p>
+  <p style="font-size:12px; margin-top:8px; opacity:0.7;">資料整理自東南旅遊行前說明書 + 04/23 行前說明會摘要</p>
+</footer>
+
+<script>
+// ============== ITINERARY DATA ==============
+// 每個景點的 desc 都是國中生能懂的介紹
+const days = [
+  {
+    num: 1, date: '4/29', dateFull: '2026/04/29 (三)',
+    title: '桃園 → 杜拜',
+    route: '桃園國際機場 → 阿聯酋航空 EK367 → 杜拜轉機',
+    highlights: [
+      { text: '20:05 桃園第二航廈集合 (阿聯酋航空團體櫃台)', siteIdx: 0 },
+      { text: '23:05 班機起飛，飛行時間約 9.5 小時' },
+      { text: '04:35 (+1) 抵達杜拜，等待轉機' }
+    ],
+    notes: [
+      '建議當日穿著舒適衣服鞋子',
+      '機上請務必享用餐點，培養體力',
+      '攜帶頸枕、眼罩、耳塞幫助睡眠',
+      '提醒：中段轉機務必跟隨領隊指引'
+    ],
+    meals: { b: '×', l: '×', d: '機上晚餐' },
+    hotel: '機上過夜',
+    optional: [],
+    points: [
+      {
+        name: '桃園國際機場 T2', lat: 25.0777, lng: 121.2328,
+        tip: '20:05 集合，請提前 30 分鐘到達',
+        desc: '台灣最大的國際機場，第二航廈是阿聯酋航空的起飛地。團體集合地點在阿聯酋航空團體櫃台。'
+      }
+    ],
+    photoTip: '出發前在阿聯酋櫃台拍張團體照，紀念旅程開始'
+  },
+  {
+    num: 2, date: '4/30', dateFull: '2026/04/30 (四)',
+    title: '杜拜 → 開羅 · 古城堡區',
+    route: '杜拜 → EK927 → 開羅 → 薩拉丁古城堡 → 阿里清真寺',
+    highlights: [
+      { text: '08:15 杜拜起飛，11:05 抵達開羅', siteIdx: 0 },
+      { text: '參觀薩拉丁古城堡 (建於 1176 年)', siteIdx: 1 },
+      { text: '入內參觀穆罕默德阿里清真寺', siteIdx: 2 },
+      { text: '晚餐：埃及傳統烤乳鴿 (不敢吃可換烤雞)', siteIdx: 3 }
+    ],
+    notes: [
+      '⚠️ 阿里清真寺務必穿長褲',
+      '入清真寺需脫鞋',
+      '飯店附近無超市，建議自備零食',
+      '領隊會在加油站超市安排採買時間'
+    ],
+    meals: { b: '機上簡餐', l: '至高點景觀餐廳', d: '埃及傳統烤乳鴿' },
+    hotel: 'Pyramids Park Resort (金字塔對面)',
+    optional: [
+      { name: '埃及國家文明博物館', price: '$70 USD', desc: '木乃伊展覽，1.5 小時，需 8 人成行' },
+      { name: '埃及考古博物館', price: '$60 USD', desc: '12 萬件珍藏，1.5 小時，需 8 人成行' }
+    ],
+    points: [
+      {
+        name: '開羅國際機場', lat: 30.1219, lng: 31.4056,
+        tip: '11:05 抵達',
+        desc: '埃及最大的國際機場，也是我們踏上埃及的第一站。距離開羅市中心約 20 公里。'
+      },
+      {
+        name: '薩拉丁古城堡', lat: 30.0287, lng: 31.2599,
+        tip: '下車拍照',
+        desc: '建於 1176 年的大型城堡，位於開羅山丘上。薩拉丁是伊斯蘭世界的英雄，帶領穆斯林對抗十字軍，也就是電影《王者天下》裡的那位蘇丹王。這座城堡是他對抗十字軍的重要據點。',
+        era: '伊斯蘭時期 · 1176 AD'
+      },
+      {
+        name: '穆罕默德·阿里清真寺', lat: 30.0287, lng: 31.2599,
+        tip: '入內參觀，務必穿長褲',
+        desc: '19 世紀穆罕默德·阿里所建，他被稱為「現代埃及之父」，讓埃及從鄂圖曼土耳其統治下獨立出來。清真寺採土耳其風格，大圓頂上覆蓋銀色錫片，內部莊嚴華麗，又稱「雪花石膏清真寺」。',
+        era: '伊斯蘭時期 · 1830 AD'
+      },
+      {
+        name: 'Pyramids Park Resort', lat: 29.9892, lng: 31.1538,
+        tip: '今晚住宿 · 金字塔對面',
+        desc: '位於吉薩金字塔群正對面的度假村，從飯店就可以看到金字塔。我們 D2、D8、D9 三次都會住這裡。'
+      }
+    ],
+    photoTip: '清真寺內部圓頂仰拍，展現幾何之美'
+  },
+  {
+    num: 3, date: '5/01', dateFull: '2026/05/01 (五)',
+    title: '開羅 → 亞斯文 · 登尼羅河郵輪',
+    route: '開羅 → 國內航班 SM100 → 亞斯文大水壩 → 風帆船 → 河輪',
+    highlights: [
+      { text: '08:00 國內線飛亞斯文 (CAI → ASW)', siteIdx: 0 },
+      { text: '參觀亞斯文大水壩 (世界三大水壩之一)', siteIdx: 1 },
+      { text: '體驗尼羅河三角風帆船 (Felucca)', siteIdx: 2 },
+      { text: '登尼羅河郵輪，開始 4 天 3 夜河輪行程', siteIdx: 3 }
+    ],
+    notes: [
+      '⚠️ 國內段託運限 1 件、23 公斤',
+      '帶泳衣泳帽 (河輪有泳池)',
+      '河輪無免費 Wi-Fi，預先下載影片',
+      '河輪小費 $4 USD/人/天 (共 $16)'
+    ],
+    meals: { b: '旅館早餐/餐盒', l: '遊輪自助餐', d: '遊輪自助餐' },
+    hotel: 'M/S Princess Sara Nile Cruise',
+    optional: [
+      { name: '菲萊神殿', price: '$70 USD', desc: '托勒密王朝建築，搭船前往島上，1.5 小時' },
+      { name: '努比亞村落', price: '$80 USD', desc: '騎駱駝拜訪沙漠人家，努比亞下午茶' }
+    ],
+    points: [
+      {
+        name: '亞斯文機場', lat: 23.9644, lng: 32.8197,
+        tip: '09:20 抵達',
+        desc: '埃及南部城市亞斯文的機場。亞斯文是古埃及的南方邊境，也是我們尼羅河郵輪的起點。'
+      },
+      {
+        name: '亞斯文大水壩', lat: 23.9706, lng: 32.8772,
+        tip: '下車拍照',
+        desc: '1960 年代由俄國幫忙興建的巨型水壩，用來控制尼羅河每年的氾濫。建這座水壩用掉的石塊，是古夫金字塔的十幾倍！不過它也淹沒了阿布辛貝神殿原本的位置，所以神殿被整個搬遷到高處。',
+        era: '現代 · 1960s AD'
+      },
+      {
+        name: '風帆船 Felucca', lat: 24.0889, lng: 32.8836,
+        tip: '尼羅河上的浪漫體驗',
+        desc: '埃及傳統三角帆船，古時候法老王視察用的。搭著風帆船在尼羅河上漂浮，聽船家唱努比亞歌曲，是很放鬆的體驗。'
+      },
+      {
+        name: '河輪登船 (亞斯文)', lat: 24.0889, lng: 32.8836,
+        tip: '4 天 3 夜河輪起點',
+        desc: '從這裡搭上尼羅河郵輪，沿著尼羅河往北航行到路克索。河輪就像漂浮的飯店，有泳池、餐廳、甲板。'
+      }
+    ],
+    photoTip: '風帆船上拍藍天白雲+船帆，逆光剪影超美'
+  },
+  {
+    num: 4, date: '5/02', dateFull: '2026/05/02 (六)',
+    title: '阿布辛貝大小神殿 · 康孟波神殿',
+    route: '亞斯文 → 阿布辛貝 (3.5h) → 亞斯文 → 河輪 → 康孟波神殿',
+    highlights: [
+      { text: '⏰ 凌晨 3:00 起床，搭巴士前往阿布辛貝' },
+      { text: '參觀拉美西斯二世建造的兩座神殿', siteIdx: 0 },
+      { text: '河輪傍晚航行至康孟波' },
+      { text: '夜訪康孟波神殿 (鷹神 + 鱷魚神)', siteIdx: 1 }
+    ],
+    notes: [
+      '⚠️ 起床超早，前一晚務必早睡',
+      '車程 3.5 小時，車上有空調可休息',
+      '康孟波夜訪請穿防風外套',
+      '帶足水和能量補充'
+    ],
+    meals: { b: '遊輪早餐/餐盒', l: '遊輪自助餐', d: '遊輪自助餐' },
+    hotel: 'M/S Princess Sara Nile Cruise',
+    optional: [],
+    points: [
+      {
+        name: '阿布辛貝神殿', lat: 22.3372, lng: 31.6258,
+        tip: '⭐ 與金字塔齊名的奇蹟',
+        desc: '西元前 1275 年由拉美西斯二世建造，距今約 3300 年。整座神殿是從一整座岩山雕刻而成！門口有四座 20 公尺高的拉美西斯二世巨像，象徵他的威武。1960 年代因為要建亞斯文水壩，整座神殿被切成塊狀往上搬了 65 公尺，是人類史上最偉大的古蹟救援工程。',
+        era: '新王國 · 1275 BC'
+      },
+      {
+        name: '康孟波神殿', lat: 24.4522, lng: 32.9281,
+        tip: '夜間參觀，請穿外套',
+        desc: '托勒密王朝時期 (希臘人統治埃及的時代) 建造，西元前 180 年左右。這座神殿很特別，同時供奉兩個神：鷹神荷魯斯和鱷魚神索貝克，神殿內部完全左右對稱，全埃及只有這一座這樣設計。',
+        era: '托勒密王朝 · 180 BC'
+      }
+    ],
+    photoTip: '阿布辛貝四座巨像正面拍人物比例對比，超震撼'
+  },
+  {
+    num: 5, date: '5/03', dateFull: '2026/05/03 (日)',
+    title: '艾德福神殿 · 伊斯納水閘',
+    route: '河輪航行 → 艾德福 (馬車) → 伊斯納水閘 → 路克索',
+    highlights: [
+      { text: '清晨搭馬車前往艾德福神殿', siteIdx: 0 },
+      { text: '艾德福：埃及保存最完整神殿之一' },
+      { text: '河輪過伊斯納水閘 (有趣的丟丟樂)', siteIdx: 1 },
+      { text: '下午抵路克索，參觀路克索神殿', siteIdx: 2 }
+    ],
+    notes: [
+      '馬車前往艾德福建議戴口罩 (防風沙與氣味)',
+      '過水閘時可上甲板看小販丟丟樂',
+      '丟丟樂是傳統水上交易，可拍照觀察',
+      '路克索神殿可看埃及信仰變遷 (清真寺+教堂遺跡)'
+    ],
+    meals: { b: '遊輪早餐', l: '遊輪自助餐', d: '遊輪自助餐' },
+    hotel: 'M/S Princess Sara Nile Cruise',
+    optional: [],
+    points: [
+      {
+        name: '艾德福神殿', lat: 24.9778, lng: 32.8731,
+        tip: '搭馬車前往，戴口罩',
+        desc: '埃及保存最完整的神殿，托勒密王朝時期建造 (西元前 237-57 年)。供奉鷹神荷魯斯，牆上的浮雕描繪了荷魯斯和邪惡之神塞特的大戰。因為年代比較近，加上被沙埋住保存好，這座神殿的雕刻到現在都還很清晰。',
+        era: '托勒密王朝 · 237 BC'
+      },
+      {
+        name: '伊斯納水閘', lat: 25.2917, lng: 32.5544,
+        tip: '丟丟樂水上交易',
+        desc: '尼羅河上的水閘門，因為這段河流水位高低不同，大船要經過就需要水閘來調節水位 (就像電梯一樣把船升降)。過水閘時，小販會開小船靠近大船，用「丟丟樂」把商品丟上來給遊客看，很有趣！'
+      },
+      {
+        name: '路克索神殿', lat: 25.6997, lng: 32.6391,
+        tip: '前後 1900 年的歷史層疊',
+        desc: '新王國時期開始建造 (約 1400 BC)，前後花了 1900 年才完成。這座神殿特別的地方是：你可以同時看到古埃及、基督教、伊斯蘭教的痕跡 — 古埃及神殿+13 世紀清真寺+羅馬時期教堂遺跡，三種信仰疊在一起。',
+        era: '新王國 · 1400 BC 起'
+      }
+    ],
+    photoTip: '艾德福老鷹石像+門口廊柱，復古電影感'
+  },
+  {
+    num: 6, date: '5/04', dateFull: '2026/05/04 (一)',
+    title: '帝王谷 · 卡納克神廟 · 前往胡加達',
+    route: '路克索 (帝王谷 + 卡納克 + 曼儂巨像) → 巴士 4-5h → 胡加達',
+    highlights: [
+      { text: '上午下船，參觀帝王谷 (3 座墓室)', siteIdx: 0 },
+      { text: '卡納克神廟 134 根 12 公尺巨柱大柱廳', siteIdx: 1 },
+      { text: '曼儂巨像下車拍照', siteIdx: 2 },
+      { text: '下午搭巴士 4-5 小時前往紅海胡加達', siteIdx: 3 }
+    ],
+    notes: [
+      '⚠️ 易暈車者備妥暈車藥',
+      '帝王谷內禁止拍照 (室內)',
+      '卡納克聖甲蟲雕像逆時針轉圈帶來好運',
+      '抵達 Movenpick SomaBay 享紅海海景'
+    ],
+    meals: { b: '遊輪早餐', l: '底比斯鄉村風情餐廳', d: '飯店內用' },
+    hotel: 'Movenpick SomaBay (紅海度假村)',
+    optional: [
+      { name: '熱氣球升空 (清晨)', price: '$200 USD', desc: '俯瞰帝王谷與尼羅河，40 分鐘飛行' }
+    ],
+    points: [
+      {
+        name: '帝王谷', lat: 25.7402, lng: 32.6014,
+        tip: '法老陵墓集中地',
+        desc: '新王國時期的法老墳墓區 (約 1550-1070 BC)，藏在尼羅河西岸的峭壁山谷裡。已發現 62 座陵墓，圖坦卡門、拉美西斯六世、塞提一世都埋在這裡。法老們選這裡是希望避開盜墓者，陵墓裡還有假入口和假房間誤導盜賊。',
+        era: '新王國 · 1550-1070 BC'
+      },
+      {
+        name: '卡納克神殿', lat: 25.7188, lng: 32.6573,
+        tip: '⭐ 必拍大柱廳',
+        desc: '埃及最大的神殿群，從中王國時期 (2000 BC) 開始建，一直到新王國持續擴建。最有名的是大柱廳，134 根 12 公尺高的巨大石柱，每根要 5 個人才能合抱！石柱上還留著彩色浮雕。裡面還有埃及最高的方尖碑 (29.2 公尺)，是哈姬蘇女法老所立。',
+        era: '中王國 → 新王國 · 2000 BC 起'
+      },
+      {
+        name: '曼儂巨像', lat: 25.7203, lng: 32.6103,
+        tip: '下車拍照',
+        desc: '西元前 1350 年為法老阿曼和闐三世建造的守護雕像，原本有神殿後來毀於地震，只剩這兩座巨像。傳說地震後每天清晨巨像會發出聲音，像是在哭泣 (其實是石頭熱脹冷縮的聲音)，後世修復後就不再發聲了。',
+        era: '新王國 · 1350 BC'
+      },
+      {
+        name: 'Movenpick SomaBay', lat: 26.8467, lng: 33.9897,
+        tip: '紅海度假村',
+        desc: '紅海邊的五星級度假村，位於胡加達南邊。紅海是世界知名的潛水勝地，珊瑚礁和熱帶魚超美。我們會在這裡連住 2 晚，好好休息。'
+      }
+    ],
+    photoTip: '卡納克大柱廳由下往上仰拍，凸顯宏偉感'
+  },
+  {
+    num: 7, date: '5/05', dateFull: '2026/05/05 (二)',
+    title: '胡加達 · 紅海自由日',
+    route: '全日於 Movenpick SomaBay 度假村',
+    highlights: [
+      { text: '☀️ 全日自由活動，享受紅海碧海藍天', siteIdx: 0 },
+      { text: '可使用飯店泳池、海灘設施' },
+      { text: '三餐都在飯店內 (自助餐)' },
+      { text: '可享用自備泡麵當宵夜' }
+    ],
+    notes: [
+      '紅海是潛水勝地，可參加自費活動',
+      '海邊請勿單獨下水',
+      '注意防曬補擦',
+      '大量補水，氣候乾燥'
+    ],
+    meals: { b: '旅館早餐', l: '旅館自助餐', d: '旅館自助餐' },
+    hotel: 'Movenpick SomaBay',
+    optional: [
+      { name: '玻璃底船', price: '$85 USD', desc: '欣賞熱帶魚與珊瑚礁，1-1.5 小時' },
+      { name: '吉普車拜訪貝都因部落', price: '$85 USD', desc: '沙漠探險+游牧民族文化，2-3 小時' }
+    ],
+    points: [
+      {
+        name: 'Movenpick SomaBay', lat: 26.8467, lng: 33.9897,
+        tip: '紅海度假天堂',
+        desc: '自由活動的一天！飯店有私人海灘、多個泳池、SPA。紅海的海水特別清澈，即使不下水在沙灘看海也很療癒。根據聖經記載，摩西帶領以色列人出埃及時，就是從這片海中穿越過去的。'
+      }
+    ],
+    photoTip: '清晨日出 + 海邊倒影，記得早點起床'
+  },
+  {
+    num: 8, date: '5/06', dateFull: '2026/05/06 (三)',
+    title: '胡加達 → 開羅 · 哈利利市集',
+    route: '胡加達 → 巴士 466km/6h → 開羅 → 哈利利大市集',
+    highlights: [
+      { text: '⚠️ 長途巴士約 6 小時車程' },
+      { text: '中午海鮮風味餐' },
+      { text: '晚間造訪可汗哈利利大市集', siteIdx: 0 },
+      { text: '埃及最大傳統市集 (14 世紀至今)' }
+    ],
+    notes: [
+      '暈車藥備好',
+      '車上有空調可休息',
+      '市集殺價從 3-5 折開始',
+      '可買：香精油、莎草紙、椰棗、紀念品'
+    ],
+    meals: { b: '旅館早餐/餐盒', l: '海鮮風味料理', d: '埃及風味料理' },
+    hotel: 'Pyramids Park Resort',
+    optional: [
+      { name: '吉薩金字塔燈光秀', price: '$75 USD', desc: '夜間音樂+投影，1.5 小時' }
+    ],
+    points: [
+      {
+        name: '哈利利大市集', lat: 30.0476, lng: 31.2622,
+        tip: '⭐ 紀念品天堂，記得殺價',
+        desc: '創立於 1382 年的傳統市集，是埃及最大也最熱鬧的市集。巷弄迷宮般蜿蜒，賣的東西五花八門：香精油、莎草紙畫、銀飾、紡織品、香料、椰棗。記得殺價，開價可以從 3-5 折開始殺起。',
+        era: '伊斯蘭時期 · 1382 AD'
+      },
+      {
+        name: 'Pyramids Park Resort', lat: 29.9892, lng: 31.1538,
+        tip: '回到熟悉的飯店',
+        desc: '再次回到金字塔對面的飯店，準備接下來的重頭戲：大埃及博物館和金字塔群。'
+      }
+    ],
+    photoTip: '市集巷弄燈光+建築剪影，異國感滿分'
+  },
+  {
+    num: 9, date: '5/07', dateFull: '2026/05/07 (四)',
+    title: '吉薩金字塔群 · 大埃及博物館',
+    route: '上午博物館 → 下午吉薩 (金字塔 + 人面獅身 + 騎駱駝) → 老開羅',
+    highlights: [
+      { text: '⭐ 上午全新開幕的大埃及博物館', siteIdx: 0 },
+      { text: '重點：圖坦卡門寶藏' },
+      { text: '⭐ 下午吉薩三大金字塔 + 人面獅身像', siteIdx: 1 },
+      { text: '金字塔旁人面獅身像', siteIdx: 2 },
+      { text: '金字塔區騎駱駝體驗' },
+      { text: '金字塔景觀餐廳午餐' },
+      { text: '老開羅懸吊教堂、香精工坊、莎草紙店', siteIdx: 3 }
+    ],
+    notes: [
+      '⚠️ 金字塔區絕對禁止空拍機',
+      '入內參觀其中一座金字塔 (門票含)',
+      '騎駱駝請聽從駱駝伕指示',
+      '心臟病/孕婦請斟酌',
+      '可購買埃及特產 (香精、莎草紙)'
+    ],
+    meals: { b: '旅館早餐', l: '金字塔區景觀餐廳', d: '非洲料理塔吉鍋' },
+    hotel: 'Pyramids Park Resort',
+    optional: [],
+    points: [
+      {
+        name: '大埃及博物館', lat: 29.9933, lng: 31.1196,
+        tip: '⭐ 全新開幕，圖坦卡門寶藏',
+        desc: '2024 年才全面開幕的全球最大考古博物館！佔地 48 萬平方公尺，收藏了埃及 70 萬年的文物，共 12 個展廳。重點是圖坦卡門法老的全部寶藏 (5000 多件)，包括最有名的黃金面具。圖坦卡門是 9 歲就當上法老，19 歲就過世的少年法老，他的陵墓是 1922 年被英國考古學家發現的，震驚世界。',
+        era: '現代 · 2024 AD'
+      },
+      {
+        name: '吉薩金字塔群', lat: 29.9792, lng: 31.1342,
+        tip: '⭐ 世界七大奇蹟',
+        desc: '古王國時期建造，約西元前 2570 年，距今 4600 年！三座金字塔由祖孫三代法老建造：古夫 (爺爺)、卡夫拉 (爸爸)、曼考拉 (孫子)。古夫金字塔原本高 146 公尺，用了 230 萬塊石頭，每塊重 2.5 噸。是世界七大奇蹟中唯一還存在的。門票含入內參觀其中一座。',
+        era: '古王國 · 2570 BC'
+      },
+      {
+        name: '人面獅身像', lat: 29.9753, lng: 31.1376,
+        tip: '74m 長的謎樣神獸',
+        desc: '和金字塔差不多年代 (約 2500 BC)，用整座石灰岩山雕成，長 74 公尺、高 20 公尺。它有人的臉 (據說是卡夫拉法老)、獅子的身體，守護著金字塔群。鼻子被打掉的原因至今是謎 (一說被拿破崙軍隊打壞，但不實；另一說是 14 世紀宗教狂熱分子所為)。',
+        era: '古王國 · 2500 BC'
+      },
+      {
+        name: '懸吊教堂', lat: 30.0058, lng: 31.2306,
+        tip: '老開羅區，29 級台階',
+        desc: '公元 3 世紀的基督教教堂，因為是蓋在羅馬要塞的兩個塔樓之間，沒有地基而是「懸空」，所以叫懸吊教堂。要走 29 級台階才能進去。現在旅客戲稱它是「樓梯教堂」。',
+        era: '羅馬/基督教時期 · 3 世紀 AD'
+      }
+    ],
+    photoTip: '金字塔前低角度拍人物，可拍出托起金字塔的趣味照'
+  },
+  {
+    num: 10, date: '5/08', dateFull: '2026/05/08 (五)',
+    title: '開羅 → 杜拜 · 返程',
+    route: '購物 → 開羅機場 → EK924 → 杜拜轉機',
+    highlights: [
+      { text: '上午自由時間 / 補購紀念品' },
+      { text: '20:05 開羅起飛 (約 17:00 抵機場)', siteIdx: 0 },
+      { text: '00:40 (+1) 抵達杜拜，等待轉機' }
+    ],
+    notes: [
+      '⚠️ 護照、機票、貴重物品再三檢查',
+      '電子菸、肉製品千萬不要帶',
+      '行李寄存的記得取回',
+      '機場小費 $1 USD/件'
+    ],
+    meals: { b: '旅館早餐', l: '埃及風味料理', d: '機上簡餐' },
+    hotel: '機上過夜',
+    optional: [],
+    points: [
+      {
+        name: '開羅國際機場', lat: 30.1219, lng: 31.4056,
+        tip: '20:05 起飛，提早報到',
+        desc: '準備離開埃及啦！記得再次檢查行李，電子菸和含肉製品絕對不能帶回台灣。'
+      }
+    ],
+    photoTip: '出境前在金字塔對面飯店拍最後一張紀念'
+  },
+  {
+    num: 11, date: '5/09', dateFull: '2026/05/09 (六)',
+    title: '杜拜 → 桃園 · 平安到家',
+    route: '杜拜 → EK366 → 桃園',
+    highlights: [
+      { text: '03:45 杜拜起飛，飛行 8.5 小時' },
+      { text: '16:10 抵達桃園', siteIdx: 0 },
+      { text: '建議親友 17:10 後接機 (預留通關+提行李時間)' }
+    ],
+    notes: [
+      '⚠️ 入境前再次檢查行李，肉製品、電子菸絕對不可帶',
+      '免稅店買的酒類記得是 1L 內',
+      '回家寫遊記、整理照片趁熱'
+    ],
+    meals: { b: '機上簡餐', l: '×', d: '×' },
+    hotel: '回到溫暖的家',
+    optional: [],
+    points: [
+      {
+        name: '桃園國際機場', lat: 25.0777, lng: 121.2328,
+        tip: '16:10 抵達，平安回家',
+        desc: '歡迎回家！11 天的埃及之旅到此結束，希望滿載而歸。'
+      }
+    ],
+    photoTip: '機艙窗外日出/雲海是不錯的最後一張'
+  }
+];
+
+// ============== DAY TABS RENDERING ==============
+const dayTabsEl = document.getElementById('dayTabs');
+const dayInfoEl = document.getElementById('dayInfo');
+
+function renderTabs() {
+  let html = '';
+  html += `<div class="day-tab all-route" data-day="all">
+    <div class="d-num">FULL</div>
+    <div class="d-date">全程</div>
+  </div>`;
+  days.forEach(d => {
+    html += `<div class="day-tab" data-day="${d.num}">
+      <div class="d-num">DAY ${d.num}</div>
+      <div class="d-date">${d.date}</div>
+    </div>`;
+  });
+  dayTabsEl.innerHTML = html;
+
+  dayTabsEl.querySelectorAll('.day-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      dayTabsEl.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const d = tab.dataset.day;
+      if (d === 'all') {
+        renderAllRoute();
+      } else {
+        renderDay(parseInt(d));
+      }
+    });
+  });
+}
+
+function renderDay(num) {
+  const d = days[num - 1];
+  let html = `
+    <div class="day-title">DAY ${d.num} · ${d.dateFull}</div>
+    <div class="day-route">${d.title}<br><span style="font-size:13px;opacity:0.8">${d.route}</span></div>
+
+    <div class="info-block">
+      <h4>🌟 行程亮點</h4>
+      <ul>`;
+
+  d.highlights.forEach(h => {
+    if (typeof h === 'object' && h.siteIdx !== undefined) {
+      const siteIdx = h.siteIdx;
+      html += `<li class="with-num clickable-site" data-day="${d.num}" data-site="${siteIdx}">
+        <span class="site-num">${siteIdx + 1}</span>${h.text}
+      </li>`;
+    } else {
+      const text = typeof h === 'object' ? h.text : h;
+      html += `<li>${text}</li>`;
+    }
+  });
+
+  html += `</ul></div>
+
+    <div class="info-block">
+      <h4>💡 注意事項</h4>
+      <ul>${d.notes.map(n => `<li>${n}</li>`).join('')}</ul>
+    </div>
+
+    <div class="info-block">
+      <h4>🍽 三餐</h4>
+      <div class="meals-grid">
+        <div class="meal"><div class="m-label">早 BREAKFAST</div><div class="m-content">${d.meals.b}</div></div>
+        <div class="meal"><div class="m-label">午 LUNCH</div><div class="m-content">${d.meals.l}</div></div>
+        <div class="meal"><div class="m-label">晚 DINNER</div><div class="m-content">${d.meals.d}</div></div>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <h4>🏨 住宿</h4>
+      <div class="hotel-tag"><strong>${d.hotel}</strong></div>
+    </div>
+  `;
+
+  if (d.optional && d.optional.length > 0) {
+    html += `<div class="info-block">
+      <h4>💰 自費活動 (參考)</h4>`;
+    d.optional.forEach(o => {
+      html += `<div class="opt-activity">
+        <div class="opt-name"><span>${o.name}</span><span class="opt-price">${o.price}</span></div>
+        <div class="opt-desc">${o.desc}</div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  if (d.photoTip) {
+    html += `<div class="photo-tip">
+      <strong>📸 拍照建議：</strong>${d.photoTip}
+    </div>`;
+  }
+
+  dayInfoEl.innerHTML = html;
+
+  // Add click event for highlight items
+  dayInfoEl.querySelectorAll('.clickable-site').forEach(li => {
+    li.addEventListener('click', () => {
+      const dayNum = parseInt(li.dataset.day);
+      const siteIdx = parseInt(li.dataset.site);
+      const point = days[dayNum - 1].points[siteIdx];
+      if (point) {
+        map.setView([point.lat, point.lng], 11);
+        // Find marker and open popup
+        const marker = currentMarkers[siteIdx];
+        if (marker) marker.openPopup();
+      }
+    });
+  });
+
+  updateMap(d.num);
+  updateLegend(d.num);
+}
+
+function renderAllRoute() {
+  let html = `
+    <div class="day-title">🗺 全程路線總覽</div>
+    <div class="day-route">11 天完整路線 · 從台灣到埃及，再從尼羅河到紅海</div>
+
+    <div class="info-block">
+      <h4>🌍 旅程結構</h4>
+      <ul>
+        <li><strong>D1:</strong> 桃園出發 → 杜拜轉機</li>
+        <li><strong>D2:</strong> 抵達開羅 (薩拉丁古城堡)</li>
+        <li><strong>D3-D5:</strong> 飛亞斯文 → 尼羅河郵輪 (4 天 3 夜)</li>
+        <li><strong>D6:</strong> 路克索 → 巴士前往胡加達</li>
+        <li><strong>D7:</strong> 紅海度假村自由日</li>
+        <li><strong>D8:</strong> 巴士回開羅 → 哈利利市集</li>
+        <li><strong>D9:</strong> 大埃及博物館 + 金字塔</li>
+        <li><strong>D10-D11:</strong> 杜拜轉機 → 平安返台</li>
+      </ul>
+    </div>
+
+    <div class="info-block">
+      <h4>📍 主要城市</h4>
+      <ul>
+        <li><strong>開羅 Cairo</strong> · 行政首都，金字塔所在</li>
+        <li><strong>亞斯文 Aswan</strong> · 南部古城，河輪起點</li>
+        <li><strong>阿布辛貝 Abu Simbel</strong> · 拉美西斯神殿</li>
+        <li><strong>路克索 Luxor</strong> · 帝王谷與卡納克神廟</li>
+        <li><strong>胡加達 Hurghada</strong> · 紅海度假勝地</li>
+      </ul>
+    </div>
+
+    <div class="info-block">
+      <h4>🚗 主要交通方式</h4>
+      <ul>
+        <li>國際線：阿聯酋航空 (台灣 ↔ 杜拜 ↔ 開羅)</li>
+        <li>國內線：開羅 → 亞斯文 (1 小時)</li>
+        <li>尼羅河郵輪：亞斯文 → 路克索 (4 天 3 夜)</li>
+        <li>長途巴士：路克索 → 胡加達 (4-5h)、胡加達 → 開羅 (6h)</li>
+        <li>特殊體驗：風帆船、馬車、駱駝</li>
+      </ul>
+    </div>
+
+    <div class="photo-tip">
+      <strong>💡 提示：</strong>地圖上每個標記顯示該景點是 D1-D11 第幾天行程。點擊任一 D 標籤可聚焦該天行程。
+    </div>
+  `;
+  dayInfoEl.innerHTML = html;
+  updateMapAll();
+  updateLegend('all');
+}
+
+// ============== MAP ==============
+let map, markersGroup, currentMarkers = [];
+
+function initMap() {
+  map = L.map('map', { zoomControl: true }).setView([26.5, 31.5], 5);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap, © CARTO',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+  markersGroup = L.layerGroup().addTo(map);
+}
+
+function makeIcon(label, color, opacity = 1, size = 30) {
+  return L.divIcon({
+    className: 'custom-marker',
+    html: `<div style="
+      background:${color};
+      color:#f3e9d2;
+      width:${size}px;height:${size}px;
+      border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;
+      font-family:'Cinzel',serif;
+      font-size:${size > 24 ? 12 : 10}px;
+      border:2px solid #f3e9d2;
+      box-shadow:0 2px 8px rgba(42,31,18,0.4);
+      opacity:${opacity};
+    ">${label}</div>`,
+    iconSize: [size, size],
+    iconAnchor: [size/2, size/2]
+  });
+}
+
+function createPopup(p, dayNum, siteNum) {
+  let html = `<div class="map-popup-title">${siteNum ? `${siteNum}. ` : ''}${p.name}</div>`;
+  html += `<div class="map-popup-day">DAY ${dayNum}</div>`;
+  if (p.era) {
+    html += `<div class="map-popup-era">${p.era}</div>`;
+  }
+  if (p.desc) {
+    html += `<div class="map-popup-desc">${p.desc}</div>`;
+  }
+  if (p.tip) {
+    html += `<div class="map-popup-tip">💡 ${p.tip}</div>`;
+  }
+  return html;
+}
+
+// Show all Egypt points, highlight current day
+function updateMap(currentDayNum) {
+  markersGroup.clearLayers();
+  currentMarkers = [];
+
+  // Collect all egypt-area points from all days (excluding Taiwan)
+  const allOtherPoints = [];
+  days.forEach(d => {
+    if (d.num === currentDayNum) return;
+    d.points.forEach(p => {
+      // Filter: Egypt region only (roughly lat 20-32, lng 25-40)
+      if (p.lat >= 20 && p.lat <= 35 && p.lng >= 25 && p.lng <= 40) {
+        allOtherPoints.push({ ...p, day: d.num });
+      }
+    });
+  });
+
+  // Add grey markers for other days (excluding current day)
+  allOtherPoints.forEach(p => {
+    const marker = L.marker([p.lat, p.lng], {
+      icon: makeIcon(`D${p.day}`, '#999', 0.45, 24),
+      zIndexOffset: 0
+    }).bindPopup(createPopup(p, p.day));
+    markersGroup.addLayer(marker);
+  });
+
+  // Current day markers (highlighted)
+  const currentDay = days[currentDayNum - 1];
+  const currentLatlngs = [];
+  const currentDayEgyptPoints = currentDay.points.filter(p =>
+    p.lat >= 20 && p.lat <= 35 && p.lng >= 25 && p.lng <= 40
+  );
+
+  currentDay.points.forEach((p, idx) => {
+    // Check if this point is in Egypt region
+    const inEgypt = p.lat >= 20 && p.lat <= 35 && p.lng >= 25 && p.lng <= 40;
+    if (!inEgypt) return; // Skip Taiwan points for map display
+
+    const marker = L.marker([p.lat, p.lng], {
+      icon: makeIcon(idx + 1, '#b85431', 1, 32),
+      zIndexOffset: 1000
+    }).bindPopup(createPopup(p, currentDayNum, idx + 1));
+    markersGroup.addLayer(marker);
+    currentMarkers.push(marker);
+    currentLatlngs.push([p.lat, p.lng]);
+  });
+
+  // If current day has no Egypt points (D1, D10, D11), show Egypt default view
+  if (currentLatlngs.length === 0) {
+    // Show Egypt-wide view
+    map.setView([26.5, 31.5], 5);
+    return;
+  }
+
+  // Draw route line for current day
+  if (currentLatlngs.length > 1) {
+    const line = L.polyline(currentLatlngs, {
+      color: '#b85431',
+      weight: 3,
+      opacity: 0.7,
+      dashArray: '8, 6'
+    });
+    markersGroup.addLayer(line);
+  }
+
+  // Fit bounds to current day points (not whole Egypt)
+  if (currentLatlngs.length === 1) {
+    map.setView(currentLatlngs[0], 11);
+  } else {
+    map.fitBounds(currentLatlngs, { padding: [60, 60], maxZoom: 10 });
+  }
+}
+
+function updateMapAll() {
+  markersGroup.clearLayers();
+  currentMarkers = [];
+
+  const colorByDay = (n) => {
+    const colors = ['#b85431', '#c89b3a', '#2d6a7e', '#8a3a1f', '#1d4a5a', '#a05a2a',
+                    '#3d7a8e', '#b8732e', '#205060', '#9a4a2a', '#2d6a7e'];
+    return colors[(n - 1) % colors.length];
+  };
+
+  const egyptLatlngs = [];
+  days.forEach(d => {
+    d.points.forEach(p => {
+      // Only Egypt region
+      if (p.lat >= 20 && p.lat <= 35 && p.lng >= 25 && p.lng <= 40) {
+        const marker = L.marker([p.lat, p.lng], {
+          icon: makeIcon(`D${d.num}`, colorByDay(d.num), 1, 30)
+        }).bindPopup(createPopup(p, d.num));
+        markersGroup.addLayer(marker);
+        egyptLatlngs.push([p.lat, p.lng]);
+      }
+    });
+  });
+
+  // Connect Egypt route
+  if (egyptLatlngs.length > 1) {
+    const line = L.polyline(egyptLatlngs, {
+      color: '#2d6a7e',
+      weight: 2,
+      opacity: 0.4,
+      dashArray: '6, 4'
+    });
+    markersGroup.addLayer(line);
+  }
+
+  // Fit to Egypt only
+  if (egyptLatlngs.length > 0) {
+    map.fitBounds(egyptLatlngs, { padding: [40, 40] });
+  }
+}
+
+function updateLegend(dayNum) {
+  const legendEl = document.getElementById('mapLegend');
+  if (dayNum === 'all') {
+    legendEl.innerHTML = `
+      <div style="font-weight:700;margin-bottom:4px;font-size:12px;">🗺 全程地圖</div>
+      <div class="legend-row">
+        <span class="legend-dot" style="background:#b85431"></span>各天景點 (點擊查看)
+      </div>
+      <div style="font-size:10px;opacity:0.8;margin-top:4px;">僅顯示埃及範圍，台灣可自行縮小</div>
+    `;
+  } else {
+    legendEl.innerHTML = `
+      <div style="font-weight:700;margin-bottom:4px;font-size:12px;">📍 Day ${dayNum} 行程</div>
+      <div class="legend-row">
+        <span class="legend-dot" style="background:#b85431"></span>今天景點 (編號對應行程)
+      </div>
+      <div class="legend-row">
+        <span class="legend-dot" style="background:#999;opacity:0.5"></span>其他天景點 (參考位置)
+      </div>
+    `;
+  }
+}
+
+// ============== PACKING LIST ==============
+const defaultPackingData = {
+  '一、衣物 — 上身': [
+    '短袖 T-shirt × 5-6 件',
+    '長袖薄上衣 × 2-3 件',
+    '薄外套 (防曬用)',
+    '防風外套 (清晨/神廟用)',
+    '長袖防曬外套'
+  ],
+  '一、衣物 — 下身與其他': [
+    '長褲 × 3 條 (清真寺必須)',
+    '輕薄長裙/七分褲',
+    '泳衣/泳褲 (河輪+紅海)',
+    '泳帽 (河輪用)',
+    '內衣褲 × 6-8 套',
+    '免洗內褲 (河輪可用)',
+    '襪子 × 6 雙',
+    '睡衣 × 2 套',
+    '舒適好走的鞋 (主要)',
+    '拖鞋 (海邊+飯店)',
+    '頭巾/披肩 (防曬+清真寺)'
+  ],
+  '二、防曬與防護': [
+    'SPF50 防曬乳 (大瓶託運)',
+    'SPF50 防曬乳 (100ml 隨身)',
+    '太陽眼鏡 (UV400)',
+    '寬邊帽/遮陽帽',
+    '口罩 (馬車+風沙用)',
+    '小型陽傘 (可遮陽)',
+    '保濕乳液 (氣候極乾)',
+    '護唇膏/凡士林',
+    '面膜 (補救乾燥)',
+    '保濕噴霧'
+  ],
+  '三、藥品與健康': [
+    '腸胃藥 (重要)',
+    '止瀉藥',
+    '止痛藥',
+    '感冒藥',
+    '暈車藥 (D6/D8 巴士長途)',
+    'OK 蹦/水泡貼',
+    '個人慢性病藥',
+    '保健食品/維他命',
+    '電解質粉 (補水)',
+    '小護士/曼秀雷敦',
+    '蚊蟲叮咬藥膏'
+  ],
+  '四、盥洗與美保': [
+    '牙刷牙膏 (飯店多無)',
+    '小條洗髮精 (100ml 隨身)',
+    '小條沐浴乳/肥皂',
+    '潤髮乳/護髮',
+    '梳子',
+    '隱形眼鏡+藥水',
+    '指緣油/護手霜',
+    '化妝品 (簡裝)',
+    '電動牙刷',
+    '濕紙巾'
+  ],
+  '五、隨身與配件': [
+    '護頸枕 (長途飛行)',
+    '眼罩 + 耳塞 (機上)',
+    '帆布袋/環保袋 (購物)',
+    '手機背袋/小斜背包',
+    '腰包 (放護照現金)',
+    '雨傘 (兼遮陽)',
+    '水壺 (河輪可裝熱水)'
+  ],
+  '六、電子設備': [
+    '手機 + 充電線',
+    '行動電源 × 1-2 顆 (隨身!)',
+    '相機 + 記憶卡 + 電池',
+    '轉接頭 (旅行社送 1 個)',
+    '延長線/USB Hub (建議)',
+    '耳機',
+    '自拍棒 (小型可隨身)',
+    'eSIM 卡 (台灣先買)'
+  ],
+  '七、重要文件': [
+    '護照 (效期至 2026/11/01 後)',
+    '護照影本 (分開放)',
+    '電子機票/行程表',
+    '信用卡 Visa/Mastercard',
+    '美金現金 (新版無頭像)',
+    '美金 1 元零鈔 × 30-50 張 (小費)',
+    '台幣 (機場用)',
+    '保險資料',
+    '緊急聯絡人/領隊資訊'
+  ],
+  '八、零食與其他': [
+    '泡麵 × 5-6 包 (僅含調味粉)',
+    '餅乾/零食',
+    '茶包/咖啡包',
+    '小包面紙 × 多包',
+    '濕紙巾 × 多包',
+    '夾鏈袋 (分裝液體)',
+    '行李束帶 (旅行社送)',
+    '密封袋 (分裝衣物)'
+  ],
+  '九、絕對不可帶': [
+    '⛔ 空拍機',
+    '⛔ 電子菸/菸彈',
+    '⛔ 含肉製品 (調理包/肉乾)',
+    '⛔ 無線電棒夾',
+    '⛔ 防風型打火機'
+  ]
+};
+
+function loadPackingState() {
+  const saved = localStorage.getItem('egyptPackingStateV2');
+  if (saved) {
+    try { return JSON.parse(saved); } catch (e) { return null; }
+  }
+  return null;
+}
+
+function savePackingState(state) {
+  localStorage.setItem('egyptPackingStateV2', JSON.stringify(state));
+}
+
+let packingData = loadPackingState() || (() => {
+  const init = {};
+  Object.keys(defaultPackingData).forEach(cat => {
+    init[cat] = defaultPackingData[cat].map(text => ({ text, checked: false }));
+  });
+  return init;
+})();
+
+function renderPacking() {
+  const grid = document.getElementById('packingGrid');
+  let html = '';
+  let total = 0, checked = 0;
+
+  Object.keys(packingData).forEach(cat => {
+    const items = packingData[cat];
+    const catChecked = items.filter(i => i.checked).length;
+    total += items.length;
+    checked += catChecked;
+
+    html += `<div class="pack-cat">
+      <h3>${cat} <span class="cat-count">${catChecked}/${items.length}</span></h3>`;
+
+    items.forEach((item, idx) => {
+      html += `<label class="pack-item ${item.checked ? 'checked' : ''}">
+        <input type="checkbox" ${item.checked ? 'checked' : ''} data-cat="${cat}" data-idx="${idx}">
+        <span>${item.text}</span>
+        <button class="del-btn" data-cat="${cat}" data-idx="${idx}" title="刪除">✕</button>
+      </label>`;
+    });
+
+    html += `<div class="add-item-form">
+      <input type="text" placeholder="新增項目..." data-cat="${cat}">
+      <button data-cat="${cat}">+ 加入</button>
+    </div>`;
+    html += `</div>`;
+  });
+
+  grid.innerHTML = html;
+
+  const pct = total > 0 ? Math.round(checked / total * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${checked} / ${total} (${pct}%)`;
+
+  grid.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', e => {
+      const c = e.target.dataset.cat;
+      const i = parseInt(e.target.dataset.idx);
+      packingData[c][i].checked = e.target.checked;
+      savePackingState(packingData);
+      renderPacking();
+    });
+  });
+
+  grid.querySelectorAll('.del-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      const c = e.target.dataset.cat;
+      const i = parseInt(e.target.dataset.idx);
+      packingData[c].splice(i, 1);
+      savePackingState(packingData);
+      renderPacking();
+    });
+  });
+
+  grid.querySelectorAll('.add-item-form button').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const c = e.target.dataset.cat;
+      const input = grid.querySelector(`input[type="text"][data-cat="${c}"]`);
+      const text = input.value.trim();
+      if (text) {
+        packingData[c].push({ text, checked: false });
+        savePackingState(packingData);
+        renderPacking();
+      }
+    });
+  });
+
+  grid.querySelectorAll('.add-item-form input[type="text"]').forEach(input => {
+    input.addEventListener('keypress', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const c = e.target.dataset.cat;
+        const text = e.target.value.trim();
+        if (text) {
+          packingData[c].push({ text, checked: false });
+          savePackingState(packingData);
+          renderPacking();
+        }
+      }
+    });
+  });
+}
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (confirm('確定要重置所有勾選並還原預設清單嗎？')) {
+    localStorage.removeItem('egyptPackingStateV2');
+    packingData = (() => {
+      const init = {};
+      Object.keys(defaultPackingData).forEach(cat => {
+        init[cat] = defaultPackingData[cat].map(text => ({ text, checked: false }));
+      });
+      return init;
+    })();
+    renderPacking();
+  }
+});
+
+// ============== NAV SCROLL ==============
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.target;
+    const el = document.getElementById(target);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+const sections = ['overview', 'itinerary', 'history', 'weather', 'tips', 'packing', 'contact'];
+window.addEventListener('scroll', () => {
+  let current = sections[0];
+  for (const id of sections) {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top < 120) {
+      current = id;
+    }
+  }
+  document.querySelectorAll('.nav-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.target === current);
+  });
+});
+
+// ============== INIT ==============
+renderTabs();
+initMap();
+setTimeout(() => {
+  document.querySelector('.day-tab[data-day="2"]').click();
+}, 100);
+renderPacking();
+</script>
+</body>
+</html>
