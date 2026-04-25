@@ -81,8 +81,10 @@
   .nav-btn.active { color: var(--terracotta); font-weight: 700; }
   .nav-btn.active::after { width: 70%; }
 
-  main { max-width: 1200px; margin: 0 auto; padding: 32px 16px 80px; position: relative; z-index: 2; }
-  section { margin-bottom: 56px; scroll-margin-top: 80px; animation: fadeUp 0.6s ease-out backwards; }
+  main { max-width: 1200px; margin: 0 auto; padding: 32px 16px 80px; position: relative; z-index: 2; min-width: 0; overflow-x: hidden; }
+  section { margin-bottom: 56px; scroll-margin-top: 80px; animation: fadeUp 0.6s ease-out backwards; min-width: 0; }
+  /* 全域:長字串強制換行 */
+  p, li, span, div, h1, h2, h3, h4, td, th { word-wrap: break-word; overflow-wrap: break-word; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   .section-head { margin-bottom: 24px; border-bottom: 1px solid rgba(184, 84, 49, 0.25); padding-bottom: 12px; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
   .section-num { font-family: 'Cinzel', serif; font-size: 14px; color: var(--terracotta); letter-spacing: 0.2em; }
@@ -119,16 +121,16 @@
   .mini-day-tab.all-route { background: var(--nile); color: var(--papyrus); border-color: var(--nile); }
   .mini-day-tab.all-route.active { background: var(--nile-deep); }
 
-  .day-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .day-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; min-width: 0; }
   @media (max-width: 900px) { .day-layout { grid-template-columns: 1fr; } }
-  .day-info { background: rgba(255, 252, 244, 0.8); border: 1px solid rgba(184, 84, 49, 0.18); border-radius: 10px; padding: 22px; }
-  .day-title { font-family: 'Noto Serif TC', serif; font-size: 22px; font-weight: 700; color: var(--hieroglyph); margin-bottom: 4px; }
-  .day-route { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--nile); font-size: 16px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px dashed rgba(184, 84, 49, 0.3); }
+  .day-info { background: rgba(255, 252, 244, 0.8); border: 1px solid rgba(184, 84, 49, 0.18); border-radius: 10px; padding: 22px; min-width: 0; overflow: hidden; }
+  .day-title { font-family: 'Noto Serif TC', serif; font-size: 22px; font-weight: 700; color: var(--hieroglyph); margin-bottom: 4px; word-break: break-word; }
+  .day-route { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--nile); font-size: 16px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px dashed rgba(184, 84, 49, 0.3); word-break: break-word; }
 
-  .info-block { margin-bottom: 16px; }
+  .info-block { margin-bottom: 16px; min-width: 0; }
   .info-block h4 { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; color: var(--terracotta); margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
-  .info-block ul { list-style: none; padding-left: 0; }
-  .info-block li { padding: 6px 0 6px 18px; position: relative; font-size: 14px; color: #2a1f12; }
+  .info-block ul { list-style: none; padding-left: 0; min-width: 0; }
+  .info-block li { padding: 6px 0 6px 18px; position: relative; font-size: 14px; color: #2a1f12; word-break: break-word; line-height: 1.6; }
   .info-block li::before { content: '◆'; position: absolute; left: 0; color: var(--gold); font-size: 9px; top: 11px; }
   .info-block li.with-num { padding-left: 34px; }
   .info-block li.with-num::before { display: none; }
@@ -149,8 +151,8 @@
   .opt-activity .opt-desc { font-size: 11px; color: #5a4a35; margin-top: 3px; }
 
   /* MAP */
-  .map-wrapper { position: relative; height: 100%; min-height: 550px; display: flex; flex-direction: column; }
-  #map { flex: 1; min-height: 500px; border-radius: 10px; border: 2px solid rgba(184, 84, 49, 0.25); box-shadow: 0 8px 24px var(--shadow-soft); background: var(--papyrus-dark); }
+  .map-wrapper { position: relative; height: 100%; min-height: 550px; display: flex; flex-direction: column; min-width: 0; max-width: 100%; overflow: hidden; }
+  #map { flex: 1; min-height: 500px; border-radius: 10px; border: 2px solid rgba(184, 84, 49, 0.25); box-shadow: 0 8px 24px var(--shadow-soft); background: var(--papyrus-dark); width: 100%; }
   .map-legend { position: absolute; bottom: 12px; left: 12px; background: rgba(243, 233, 210, 0.95); backdrop-filter: blur(4px); padding: 8px 12px; border-radius: 6px; font-size: 11px; color: var(--hieroglyph); border: 1px solid rgba(184, 84, 49, 0.3); z-index: 400; max-width: 200px; }
   .map-legend .legend-row { display: flex; align-items: center; gap: 6px; margin: 2px 0; }
   .legend-dot { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #f3e9d2; }
@@ -290,8 +292,8 @@
   ::-webkit-scrollbar-thumb:hover { background: var(--terracotta-deep); }
   .hidden { display: none !important; }
 
-  .photo-tip { background: linear-gradient(135deg, rgba(200, 155, 58, 0.15), rgba(200, 155, 58, 0.03)); border-left: 3px solid var(--gold); padding: 8px 12px; border-radius: 4px; font-size: 12px; margin-top: 8px; color: var(--hieroglyph); }
-  .photo-tip strong { color: var(--gold); }
+  .photo-tip { background: linear-gradient(135deg, rgba(200, 155, 58, 0.15), rgba(200, 155, 58, 0.03)); border-left: 3px solid var(--gold); padding: 8px 12px; border-radius: 4px; font-size: 12px; margin-top: 8px; color: var(--hieroglyph); word-break: break-word; line-height: 1.6; }
+  .photo-tip strong { color: var(--gold); display: inline-block; margin-right: 4px; }
 
   @media (max-width: 600px) {
     main { padding: 20px 12px 60px; }
@@ -302,6 +304,17 @@
     header { padding: 40px 16px 28px; }
     .timeline-detail { width: 92vw; padding: 20px; }
     .timeline-detail h3 { font-size: 18px; }
+
+    /* 強制所有區塊不超出螢幕 */
+    .day-layout { gap: 16px; }
+    .map-wrapper { min-height: 450px; }
+    #map { min-height: 420px; }
+    .info-block li { font-size: 13.5px; padding-left: 16px; }
+    .info-block li.with-num { padding-left: 32px; }
+    .info-block li .site-num { width: 22px; height: 22px; font-size: 10px; }
+    .photo-tip { font-size: 12px; padding: 10px 12px; }
+    .day-title { font-size: 19px; }
+    .day-route { font-size: 14px; }
   }
 </style>
 </head>
