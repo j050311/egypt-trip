@@ -305,16 +305,10 @@
     .timeline-detail { width: 92vw; padding: 20px; }
     .timeline-detail h3 { font-size: 18px; }
 
-    /* 強制所有區塊不超出螢幕 */
+    /* 鎖定寬度防止溢出,字級維持原本大小 */
     .day-layout { gap: 16px; }
     .map-wrapper { min-height: 450px; }
     #map { min-height: 420px; }
-    .info-block li { font-size: 13.5px; padding-left: 16px; }
-    .info-block li.with-num { padding-left: 32px; }
-    .info-block li .site-num { width: 22px; height: 22px; font-size: 10px; }
-    .photo-tip { font-size: 12px; padding: 10px 12px; }
-    .day-title { font-size: 19px; }
-    .day-route { font-size: 14px; }
   }
 </style>
 </head>
@@ -621,7 +615,7 @@ const days = [
     points: [
       { name: '開羅國際機場', lat: 30.1219, lng: 31.4056, tip: '11:05 抵達', desc: '埃及最大的國際機場,也是我們踏上埃及的第一站。距離開羅市中心約 20 公里。' },
       { name: '薩拉丁古城堡', lat: 30.0287, lng: 31.2599, tip: '下車拍照', desc: '建於 1176 年的大型城堡,位於開羅山丘上。薩拉丁是伊斯蘭世界的英雄,帶領穆斯林對抗十字軍,也就是電影《王者天下》裡的那位蘇丹王。這座城堡是他對抗十字軍的重要據點。', era: '伊斯蘭時期 · 1176 AD' },
-      { name: '穆罕默德·阿里清真寺', lat: 30.0287, lng: 31.2599, tip: '入內參觀,務必穿長褲', desc: '19 世紀穆罕默德·阿里所建,他被稱為「現代埃及之父」,讓埃及從鄂圖曼土耳其統治下獨立出來。清真寺採土耳其風格,大圓頂上覆蓋銀色錫片,內部莊嚴華麗,又稱「雪花石膏清真寺」。', era: '伊斯蘭時期 · 1830 AD' },
+      { name: '穆罕默德·阿里清真寺', lat: 30.0289, lng: 31.2603, tip: '入內參觀,務必穿長褲', desc: '19 世紀穆罕默德·阿里所建,他被稱為「現代埃及之父」,讓埃及從鄂圖曼土耳其統治下獨立出來。清真寺採土耳其風格,大圓頂上覆蓋銀色錫片,內部莊嚴華麗,又稱「雪花石膏清真寺」。', era: '伊斯蘭時期 · 1830 AD' },
       { name: 'Pyramids Park Resort', lat: 29.9892, lng: 31.1538, tip: '今晚住宿 · 金字塔對面', desc: '位於吉薩金字塔群正對面的度假村,從飯店就可以看到金字塔。我們 D2、D8、D9 三次都會住這裡。' }
     ],
     photoTip: '清真寺內部圓頂仰拍,展現幾何之美'
@@ -647,7 +641,7 @@ const days = [
       { name: '亞斯文機場', lat: 23.9644, lng: 32.8197, tip: '09:20 抵達', desc: '埃及南部城市亞斯文的機場。亞斯文是古埃及的南方邊境,也是我們尼羅河郵輪的起點。' },
       { name: '亞斯文大水壩', lat: 23.9706, lng: 32.8772, tip: '下車拍照', desc: '1960 年代由俄國幫忙興建的巨型水壩,用來控制尼羅河每年的氾濫。建這座水壩用掉的石塊,是古夫金字塔的十幾倍!不過它也淹沒了阿布辛貝神殿原本的位置,所以神殿被整個搬遷到高處。', era: '現代 · 1960s AD' },
       { name: '風帆船 Felucca', lat: 24.0889, lng: 32.8836, tip: '尼羅河上的浪漫體驗', desc: '埃及傳統三角帆船,古時候法老王視察用的。搭著風帆船在尼羅河上漂浮,聽船家唱努比亞歌曲,是很放鬆的體驗。' },
-      { name: '河輪登船 (亞斯文)', lat: 24.0889, lng: 32.8836, tip: '4 天 3 夜河輪起點', desc: '從這裡搭上尼羅河郵輪,沿著尼羅河往北航行到路克索。河輪就像漂浮的飯店,有泳池、餐廳、甲板。' }
+      { name: '河輪登船 (亞斯文)', lat: 24.0901, lng: 32.8828, tip: '4 天 3 夜河輪起點', desc: '從這裡搭上尼羅河郵輪,沿著尼羅河往北航行到路克索。河輪就像漂浮的飯店,有泳池、餐廳、甲板。' }
     ],
     photoTip: '風帆船上拍藍天白雲+船帆,逆光剪影超美'
   },
@@ -1206,6 +1200,10 @@ function updateMap(currentDayNum) {
   markersGroup.clearLayers();
   currentMarkers = [];
 
+  // 移除之前的飛行日提示 (如果有)
+  const oldNotice = document.getElementById('flightDayNotice');
+  if (oldNotice) oldNotice.remove();
+
   // 其他天的灰色標記 (參考位置)
   const allOtherPoints = [];
   days.forEach(d => {
@@ -1242,8 +1240,38 @@ function updateMap(currentDayNum) {
     currentLatlngs.push([p.lat, p.lng]);
   });
 
+  // 如果今天沒有埃及景點 (D1, D10, D11 飛行日),顯示提示
   if (currentLatlngs.length === 0) {
     map.setView([26.5, 31.5], 5);
+    const mapEl = document.getElementById('map');
+    const notice = document.createElement('div');
+    notice.id = 'flightDayNotice';
+    notice.style.cssText = `
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(243, 233, 210, 0.95);
+      backdrop-filter: blur(8px);
+      border: 2px solid var(--terracotta);
+      border-radius: 12px;
+      padding: 24px 28px;
+      text-align: center;
+      z-index: 500;
+      box-shadow: 0 8px 24px rgba(42, 31, 18, 0.3);
+      max-width: 80%;
+    `;
+    let title = '✈️ 飛行日';
+    let msg = '今天主要是搭機與轉機';
+    if (currentDayNum === 1) { title = '✈️ Day 1 · 出發日'; msg = '今天從桃園出發,搭機前往杜拜轉機<br>埃及行程從 Day 2 開始'; }
+    else if (currentDayNum === 10) { title = '✈️ Day 10 · 返程啟程'; msg = '今晚從開羅起飛,前往杜拜轉機'; }
+    else if (currentDayNum === 11) { title = '✈️ Day 11 · 返抵台灣'; msg = '從杜拜起飛,下午抵達桃園,平安到家'; }
+    notice.innerHTML = `
+      <div style="font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700; color: var(--terracotta-deep); margin-bottom: 8px;">${title}</div>
+      <div style="font-size: 13px; color: #5a4a35; line-height: 1.6;">${msg}</div>
+      <div style="font-size: 11px; color: var(--nile); margin-top: 10px; font-style: italic;">地圖上灰色點是其他天的景點</div>
+    `;
+    mapEl.parentElement.appendChild(notice);
     return;
   }
 
@@ -1264,6 +1292,10 @@ function updateMap(currentDayNum) {
 function updateMapAll() {
   markersGroup.clearLayers();
   currentMarkers = [];
+
+  // 移除飛行日提示
+  const oldNotice = document.getElementById('flightDayNotice');
+  if (oldNotice) oldNotice.remove();
 
   const colorByDay = (n) => {
     const colors = ['#b85431', '#c89b3a', '#2d6a7e', '#8a3a1f', '#1d4a5a', '#a05a2a', '#3d7a8e', '#b8732e', '#205060', '#9a4a2a', '#2d6a7e'];
