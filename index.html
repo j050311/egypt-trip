@@ -177,7 +177,7 @@
 
   .weather-table { width: 100%; background: rgba(255, 252, 244, 0.85); border: 1px solid rgba(184, 84, 49, 0.2); border-radius: 10px; overflow: hidden; border-collapse: collapse; }
   .weather-table th, .weather-table td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(184, 84, 49, 0.1); font-size: 16px; }
-  .weather-table th { background: var(--terracotta); color: var(--papyrus); font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .weather-table th { background: var(--terracotta); color: var(--papyrus); font-family: 'Noto Sans TC', sans-serif; font-size: 16px; font-weight: 700; }
   .weather-table tr:hover td { background: rgba(184, 84, 49, 0.04); }
   .temp-pill { display: inline-block; padding: 2px 8px; border-radius: 3px; font-weight: 700; font-size: 12px; }
   .temp-cool { background: rgba(45, 106, 126, 0.15); color: var(--nile-deep); }
@@ -440,20 +440,53 @@
     <div class="section-head">
       <span class="section-num">04 / CLIMATE</span>
       <h2>天氣與穿搭對照</h2>
-      <span class="section-tag">— 出發前 3 天領隊發布精準預報</span>
+      <span class="section-tag">— 領隊提供精準預報</span>
     </div>
+
+    <div style="background: linear-gradient(135deg, rgba(45, 106, 126, 0.08), rgba(45, 106, 126, 0.02)); border: 1px solid var(--nile); border-radius: 10px; padding: 16px 18px; margin-bottom: 20px; font-size: 16px; line-height: 1.7; color: var(--hieroglyph);">
+      <strong style="color: var(--nile-deep); font-size: 17px;">🇪🇬 領隊提醒</strong><br>
+      白天走行程時氣溫基本在 <strong>25-35°C</strong> 上下,建議短袖搭配防曬外套,早晚溫差大請多準備一件防風外套保暖。飯店和河輪上皆有泳池,需要下水的貴賓請帶泳衣及泳帽 👍
+    </div>
+
     <div style="overflow-x: auto;">
       <table class="weather-table">
-        <thead><tr><th>地區/日期</th><th>氣溫</th><th>建議穿著</th><th>備註</th></tr></thead>
+        <thead><tr><th>日期</th><th>城市</th><th>氣溫</th><th>天氣</th></tr></thead>
         <tbody>
-          <tr><td><strong>開羅</strong><br>D2,D8,D9</td><td><span class="temp-pill temp-warm">20-34°C</span></td><td>短袖+長褲+薄外套</td><td>清真寺需穿長褲</td></tr>
-          <tr><td><strong>亞斯文</strong><br>D3,D4</td><td><span class="temp-pill temp-hot">24-38°C</span></td><td>短袖+防曬帽+太陽眼鏡</td><td>南部最熱,補水重要</td></tr>
-          <tr><td><strong>阿布辛貝</strong><br>D4 凌晨</td><td><span class="temp-pill temp-cool">15-22°C</span></td><td>短袖+<strong>防風外套</strong></td><td>凌晨出發很冷</td></tr>
-          <tr><td><strong>尼羅河遊輪</strong><br>D3-D5</td><td><span class="temp-pill temp-warm">20-32°C</span></td><td>短袖+泳衣+薄長褲</td><td>晚上參觀神殿要薄外套</td></tr>
-          <tr><td><strong>路克索</strong><br>D5-D6</td><td><span class="temp-pill temp-hot">22-36°C</span></td><td>短袖+防曬+口罩</td><td>馬車去神殿戴口罩</td></tr>
-          <tr><td><strong>胡加達</strong><br>D6-D8</td><td><span class="temp-pill temp-warm">22-30°C</span></td><td>泳裝+短袖+拖鞋</td><td>紅海度假</td></tr>
+          <tr><td><strong>4/29</strong><br>D1</td><td>桃園</td><td><span class="temp-pill temp-warm">20-27°C</span></td><td>陰天 ☁️</td></tr>
+          <tr><td><strong>4/30</strong><br>D2</td><td>開羅</td><td><span class="temp-pill temp-warm">14-28°C</span></td><td>晴天 ☀️</td></tr>
+          <tr><td><strong>5/1</strong><br>D3</td><td>亞斯文</td><td><span class="temp-pill temp-hot">19-36°C</span></td><td>晴天 ☀️</td></tr>
+          <tr><td><strong>5/2</strong><br>D4</td><td>亞斯文 (阿布辛貝)</td><td><span class="temp-pill temp-hot">22-38°C</span></td><td>晴天 ☀️</td></tr>
+          <tr><td><strong>5/3</strong><br>D5</td><td>艾德福</td><td><span class="temp-pill temp-hot">26-40°C</span></td><td>晴天 ☀️</td></tr>
+          <tr><td><strong>5/4</strong><br>D6</td><td>路克索 → 胡加達</td><td><span class="temp-pill temp-hot">23-35°C</span></td><td>晴天 ☀️</td></tr>
+          <tr><td><strong>5/5</strong><br>D7</td><td>胡加達</td><td><span class="temp-pill temp-warm">21-29°C</span></td><td>晴天 ☀️</td></tr>
+          <tr><td><strong>5/6</strong><br>D8</td><td>胡加達 → 開羅</td><td><span class="temp-pill temp-warm">16-29°C</span></td><td>晴天 ☀️</td></tr>
+          <tr><td><strong>5/7</strong><br>D9</td><td>開羅</td><td><span class="temp-pill temp-warm">17-31°C</span></td><td>晴天 ☀️</td></tr>
+          <tr><td><strong>5/8</strong><br>D10</td><td>開羅</td><td><span class="temp-pill temp-warm">17-31°C</span></td><td>晴天 ☀️</td></tr>
+          <tr><td><strong>5/9</strong><br>D11</td><td>桃園</td><td><span class="temp-pill temp-warm">23-29°C</span></td><td>陰天 ☁️</td></tr>
         </tbody>
       </table>
+    </div>
+
+    <div style="margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
+      <div style="background: rgba(255, 252, 244, 0.85); border-left: 4px solid var(--terracotta); border-radius: 8px; padding: 14px 16px;">
+        <div style="font-weight: 700; color: var(--terracotta-deep); font-size: 17px; margin-bottom: 6px;">🕌 Day 2 · 阿里清真寺</div>
+        <div style="font-size: 16px; line-height: 1.6; color: var(--hieroglyph);">請著<strong>長褲</strong>進入,清真寺內須脫鞋。</div>
+      </div>
+
+      <div style="background: rgba(255, 252, 244, 0.85); border-left: 4px solid var(--terracotta); border-radius: 8px; padding: 14px 16px;">
+        <div style="font-weight: 700; color: var(--terracotta-deep); font-size: 17px; margin-bottom: 6px;">🐎 Day 5 · 艾德福神廟</div>
+        <div style="font-size: 16px; line-height: 1.6; color: var(--hieroglyph);">凌晨出門注意<strong>天氣涼爽</strong>,騎馬車風沙大,建議戴<strong>口罩</strong>。</div>
+      </div>
+
+      <div style="background: rgba(255, 252, 244, 0.85); border-left: 4px solid var(--terracotta); border-radius: 8px; padding: 14px 16px;">
+        <div style="font-weight: 700; color: var(--terracotta-deep); font-size: 17px; margin-bottom: 6px;">🐪 Day 9 · 騎駱駝</div>
+        <div style="font-size: 16px; line-height: 1.6; color: var(--hieroglyph);">建議穿<strong>長褲</strong>,避免摩擦不適。</div>
+      </div>
+
+      <div style="background: rgba(255, 252, 244, 0.85); border-left: 4px solid var(--nile); border-radius: 8px; padding: 14px 16px;">
+        <div style="font-weight: 700; color: var(--nile-deep); font-size: 17px; margin-bottom: 6px;">🏊 泳池體驗</div>
+        <div style="font-size: 16px; line-height: 1.6; color: var(--hieroglyph);">飯店和河輪皆有泳池,需要下水請備<strong>泳衣 + 泳帽</strong>。</div>
+      </div>
     </div>
   </section>
 
