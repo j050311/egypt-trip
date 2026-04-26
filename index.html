@@ -56,7 +56,7 @@
   h1 { font-family: 'Noto Serif TC', serif; font-weight: 900; font-size: clamp(32px, 5.5vw, 56px); color: var(--hieroglyph); line-height: 1.1; margin-bottom: 14px; letter-spacing: -0.01em; }
   h1 .accent { color: var(--terracotta); font-style: italic; }
   .hero-sub { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 2vw, 22px); color: var(--nile-deep); font-style: italic; margin-bottom: 24px; }
-  .hero-meta { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; padding: 12px 28px; background: rgba(243, 233, 210, 0.6); border: 1px solid rgba(184, 84, 49, 0.2); border-radius: 4px; font-size: 13px; color: var(--hieroglyph); }
+  .hero-meta { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; padding: 12px 28px; background: rgba(243, 233, 210, 0.6); border: 1px solid rgba(184, 84, 49, 0.2); border-radius: 4px; font-size: 15px; color: var(--hieroglyph); }
   .hero-meta span { display: flex; align-items: center; gap: 6px; }
   .hero-meta strong { color: var(--terracotta); font-weight: 700; }
 
@@ -72,7 +72,7 @@
   .nav-btn {
     background: none; border: none; padding: 14px 18px;
     font-family: 'Noto Sans TC', sans-serif;
-    font-size: 14px; font-weight: 500; color: var(--hieroglyph);
+    font-size: 16px; font-weight: 500; color: var(--hieroglyph);
     cursor: pointer; position: relative; white-space: nowrap;
     transition: color 0.2s;
   }
@@ -89,7 +89,7 @@
   .section-head { margin-bottom: 24px; border-bottom: 1px solid rgba(184, 84, 49, 0.25); padding-bottom: 12px; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
   .section-num { font-family: 'Cinzel', serif; font-size: 14px; color: var(--terracotta); letter-spacing: 0.2em; }
   h2 { font-family: 'Noto Serif TC', serif; font-weight: 700; font-size: clamp(24px, 3.5vw, 34px); color: var(--hieroglyph); }
-  .section-tag { margin-left: auto; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--nile); font-size: 16px; }
+  .section-tag { margin-left: auto; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--nile); font-size: 17px; }
 
   /* OVERVIEW - 手機 2 欄 */
   .overview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
@@ -99,10 +99,10 @@
   .ov-card { background: rgba(255, 252, 244, 0.7); border: 1px solid rgba(184, 84, 49, 0.18); border-radius: 8px; padding: 18px; transition: all 0.3s; }
   @media (max-width: 600px) { .ov-card { padding: 14px 12px; } }
   .ov-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px var(--shadow-soft); border-color: var(--terracotta); }
-  .ov-card .label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.2em; color: var(--nile); margin-bottom: 8px; text-transform: uppercase; }
+  .ov-card .label { font-family: 'Noto Sans TC', sans-serif; font-size: 16px; font-weight: 600; color: var(--nile); margin-bottom: 8px; }
   .ov-card .value { font-family: 'Noto Serif TC', serif; font-size: 22px; font-weight: 700; color: var(--hieroglyph); margin-bottom: 4px; }
-  @media (max-width: 600px) { .ov-card .value { font-size: 18px; } .ov-card .desc { font-size: 11px; } }
-  .ov-card .desc { font-size: 12px; color: #5a4a35; }
+  @media (max-width: 600px) { .ov-card .value { font-size: 22px; } .ov-card .desc { font-size: 11px; } }
+  .ov-card .desc { font-size: 16px; color: #5a4a35; }
 
   .day-tabs { display: flex; gap: 6px; overflow-x: auto; padding: 6px 2px 12px; margin-bottom: 20px; scrollbar-width: thin; }
   .day-tab { flex-shrink: 0; background: rgba(255, 252, 244, 0.8); border: 1px solid rgba(184, 84, 49, 0.2); border-radius: 8px; padding: 10px 14px; cursor: pointer; transition: all 0.25s; min-width: 76px; text-align: center; }
@@ -124,46 +124,46 @@
   .day-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; min-width: 0; }
   @media (max-width: 900px) { .day-layout { grid-template-columns: 1fr; } }
   .day-info { background: rgba(255, 252, 244, 0.8); border: 1px solid rgba(184, 84, 49, 0.18); border-radius: 10px; padding: 22px; min-width: 0; overflow: hidden; }
-  .day-title { font-family: 'Noto Serif TC', serif; font-size: 22px; font-weight: 700; color: var(--hieroglyph); margin-bottom: 4px; word-break: break-word; }
-  .day-route { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--nile); font-size: 16px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px dashed rgba(184, 84, 49, 0.3); word-break: break-word; }
+  .day-title { font-family: 'Noto Serif TC', serif; font-size: 24px; font-weight: 700; color: var(--hieroglyph); margin-bottom: 6px; word-break: break-word; }
+  .day-route { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--nile); font-size: 17px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px dashed rgba(184, 84, 49, 0.3); word-break: break-word; line-height: 1.5; }
 
   .info-block { margin-bottom: 16px; min-width: 0; }
-  .info-block h4 { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; color: var(--terracotta); margin-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
+  .info-block h4 { font-family: 'Noto Sans TC', sans-serif; font-size: 17px; font-weight: 700; color: var(--terracotta); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
   .info-block ul { list-style: none; padding-left: 0; min-width: 0; }
-  .info-block li { padding: 6px 0 6px 18px; position: relative; font-size: 14px; color: #2a1f12; word-break: break-word; line-height: 1.6; }
+  .info-block li { padding: 8px 0 8px 18px; position: relative; font-size: 16px; color: #2a1f12; word-break: break-word; line-height: 1.65; }
   .info-block li::before { content: '◆'; position: absolute; left: 0; color: var(--gold); font-size: 9px; top: 11px; }
-  .info-block li.with-num { padding-left: 34px; }
+  .info-block li.with-num { padding-left: 38px; }
   .info-block li.with-num::before { display: none; }
-  .info-block li .site-num { position: absolute; left: 0; top: 7px; display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: var(--terracotta); color: var(--papyrus); border-radius: 50%; font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700; box-shadow: 0 2px 4px rgba(138, 58, 31, 0.3); }
+  .info-block li .site-num { position: absolute; left: 0; top: 8px; display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--terracotta); color: var(--papyrus); border-radius: 50%; font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700; box-shadow: 0 2px 4px rgba(138, 58, 31, 0.3); }
   .info-block li.clickable-site { cursor: pointer; transition: background 0.2s, padding-left 0.2s; border-radius: 4px; }
   .info-block li.clickable-site:hover { background: rgba(184, 84, 49, 0.08); padding-left: 38px; }
 
   .meals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .meal { background: var(--papyrus); border: 1px solid rgba(184, 84, 49, 0.15); border-radius: 6px; padding: 10px; text-align: center; }
-  .meal .m-label { font-size: 10px; color: var(--nile); font-weight: 600; margin-bottom: 4px; }
-  .meal .m-content { font-size: 12px; color: var(--hieroglyph); line-height: 1.4; }
-  .hotel-tag { background: linear-gradient(90deg, rgba(45, 106, 126, 0.1), transparent); border-left: 3px solid var(--nile); padding: 8px 12px; border-radius: 4px; font-size: 13px; color: var(--hieroglyph); }
+  .meal { background: var(--papyrus); border: 1px solid rgba(184, 84, 49, 0.15); border-radius: 6px; padding: 12px 10px; text-align: center; }
+  .meal .m-label { font-size: 14px; color: var(--nile); font-weight: 600; margin-bottom: 6px; }
+  .meal .m-content { font-size: 16px; color: var(--hieroglyph); line-height: 1.5; }
+  .hotel-tag { background: linear-gradient(90deg, rgba(45, 106, 126, 0.1), transparent); border-left: 3px solid var(--nile); padding: 10px 14px; border-radius: 4px; font-size: 16px; color: var(--hieroglyph); }
   .hotel-tag strong { color: var(--nile-deep); }
 
-  .opt-activity { background: linear-gradient(135deg, rgba(200, 155, 58, 0.12), rgba(184, 84, 49, 0.06)); border: 1px solid rgba(200, 155, 58, 0.4); border-radius: 6px; padding: 10px 12px; margin-bottom: 6px; font-size: 13px; }
-  .opt-activity .opt-name { font-weight: 600; color: var(--terracotta-deep); display: flex; justify-content: space-between; gap: 8px; }
-  .opt-activity .opt-price { font-family: 'Cinzel', serif; color: var(--gold); font-size: 12px; }
-  .opt-activity .opt-desc { font-size: 11px; color: #5a4a35; margin-top: 3px; }
+  .opt-activity { background: linear-gradient(135deg, rgba(200, 155, 58, 0.12), rgba(184, 84, 49, 0.06)); border: 1px solid rgba(200, 155, 58, 0.4); border-radius: 6px; padding: 12px 14px; margin-bottom: 8px; font-size: 16px; }
+  .opt-activity .opt-name { font-weight: 600; color: var(--terracotta-deep); display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .opt-activity .opt-price { font-family: 'Cinzel', serif; color: var(--gold); font-size: 13px; }
+  .opt-activity .opt-desc { font-size: 15px; color: #5a4a35; margin-top: 4px; line-height: 1.5; }
 
   /* MAP */
   .map-wrapper { position: relative; height: 100%; min-height: 550px; display: flex; flex-direction: column; min-width: 0; max-width: 100%; overflow: hidden; }
   #map { flex: 1; min-height: 500px; border-radius: 10px; border: 2px solid rgba(184, 84, 49, 0.25); box-shadow: 0 8px 24px var(--shadow-soft); background: var(--papyrus-dark); width: 100%; }
-  .map-legend { position: absolute; bottom: 12px; left: 12px; background: rgba(243, 233, 210, 0.95); backdrop-filter: blur(4px); padding: 8px 12px; border-radius: 6px; font-size: 11px; color: var(--hieroglyph); border: 1px solid rgba(184, 84, 49, 0.3); z-index: 400; max-width: 200px; }
+  .map-legend { position: absolute; bottom: 12px; left: 12px; background: rgba(243, 233, 210, 0.95); backdrop-filter: blur(4px); padding: 10px 14px; border-radius: 6px; font-size: 14px; color: var(--hieroglyph); border: 1px solid rgba(184, 84, 49, 0.3); z-index: 400; max-width: 220px; }
   .map-legend .legend-row { display: flex; align-items: center; gap: 6px; margin: 2px 0; }
   .legend-dot { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #f3e9d2; }
   .leaflet-popup-content-wrapper { background: var(--papyrus); color: var(--hieroglyph); border-radius: 8px; border: 1px solid var(--terracotta); font-family: 'Noto Sans TC', sans-serif; box-shadow: 0 8px 20px rgba(42, 31, 18, 0.3); }
-  .leaflet-popup-content { margin: 12px 14px; min-width: 220px; max-width: 280px; }
+  .leaflet-popup-content { margin: 14px 16px; min-width: 240px; max-width: 320px; }
   .leaflet-popup-tip { background: var(--terracotta); }
-  .map-popup-title { font-family: 'Noto Serif TC', serif; font-weight: 700; color: var(--terracotta-deep); font-size: 15px; margin-bottom: 4px; line-height: 1.3; }
-  .map-popup-day { font-size: 11px; color: var(--nile); font-weight: 600; font-family: 'Cinzel', serif; letter-spacing: 0.1em; }
-  .map-popup-era { display: inline-block; background: var(--gold); color: var(--papyrus); padding: 2px 8px; border-radius: 3px; font-size: 10px; font-weight: 600; margin-top: 6px; }
-  .map-popup-desc { font-size: 12px; margin-top: 8px; color: #2a1f12; line-height: 1.5; }
-  .map-popup-tip { font-size: 11px; margin-top: 8px; padding: 6px 8px; background: rgba(200, 155, 58, 0.15); border-left: 2px solid var(--gold); color: #5a4a35; border-radius: 3px; }
+  .map-popup-title { font-family: 'Noto Serif TC', serif; font-weight: 700; color: var(--terracotta-deep); font-size: 17px; margin-bottom: 4px; line-height: 1.3; }
+  .map-popup-day { font-size: 13px; color: var(--nile); font-weight: 600; font-family: 'Cinzel', serif; letter-spacing: 0.1em; }
+  .map-popup-era { display: inline-block; background: var(--gold); color: var(--papyrus); padding: 3px 10px; border-radius: 3px; font-size: 12px; font-weight: 600; margin-top: 6px; }
+  .map-popup-desc { font-size: 15px; margin-top: 8px; color: #2a1f12; line-height: 1.6; }
+  .map-popup-tip { font-size: 14px; margin-top: 8px; padding: 8px 10px; background: rgba(200, 155, 58, 0.15); border-left: 2px solid var(--gold); color: #5a4a35; border-radius: 3px; }
 
   .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
   .tip-card { background: rgba(255, 252, 244, 0.85); border: 1px solid rgba(184, 84, 49, 0.2); border-radius: 10px; padding: 18px; border-top: 3px solid var(--terracotta); transition: all 0.3s; }
@@ -171,12 +171,12 @@
   .tip-card.gold { border-top-color: var(--gold); }
   .tip-card.nile { border-top-color: var(--nile); }
   .tip-card.danger { border-top-color: #c0392b; background: rgba(192, 57, 43, 0.05); }
-  .tip-card h3 { font-family: 'Noto Serif TC', serif; font-size: 17px; color: var(--hieroglyph); margin-bottom: 10px; }
-  .tip-card p { font-size: 13px; color: #2a1f12; margin-bottom: 6px; }
+  .tip-card h3 { font-family: 'Noto Serif TC', serif; font-size: 18px; color: var(--hieroglyph); margin-bottom: 10px; }
+  .tip-card p { font-size: 16px; color: #2a1f12; margin-bottom: 6px; }
   .tip-card .icon { font-size: 22px; margin-bottom: 6px; display: block; }
 
   .weather-table { width: 100%; background: rgba(255, 252, 244, 0.85); border: 1px solid rgba(184, 84, 49, 0.2); border-radius: 10px; overflow: hidden; border-collapse: collapse; }
-  .weather-table th, .weather-table td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(184, 84, 49, 0.1); font-size: 13px; }
+  .weather-table th, .weather-table td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(184, 84, 49, 0.1); font-size: 16px; }
   .weather-table th { background: var(--terracotta); color: var(--papyrus); font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; }
   .weather-table tr:hover td { background: rgba(184, 84, 49, 0.04); }
   .temp-pill { display: inline-block; padding: 2px 8px; border-radius: 3px; font-weight: 700; font-size: 12px; }
@@ -187,43 +187,43 @@
   .packing-controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
   .progress-bar { flex: 1; min-width: 200px; height: 12px; background: rgba(184, 84, 49, 0.15); border-radius: 6px; overflow: hidden; position: relative; }
   .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--terracotta)); transition: width 0.4s ease; border-radius: 6px; }
-  .progress-text { font-size: 13px; font-weight: 600; color: var(--hieroglyph); white-space: nowrap; }
-  .reset-btn { background: transparent; border: 1px solid var(--terracotta); color: var(--terracotta); padding: 6px 14px; border-radius: 4px; font-size: 12px; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+  .progress-text { font-size: 16px; font-weight: 600; color: var(--hieroglyph); white-space: nowrap; }
+  .reset-btn { background: transparent; border: 1px solid var(--terracotta); color: var(--terracotta); padding: 8px 14px; border-radius: 4px; font-size: 14px; cursor: pointer; font-family: inherit; transition: all 0.2s; }
   .reset-btn:hover { background: var(--terracotta); color: var(--papyrus); }
 
-  .packing-notice { background: linear-gradient(90deg, rgba(45, 106, 126, 0.1), transparent); border-left: 3px solid var(--nile); padding: 10px 14px; border-radius: 4px; font-size: 12px; color: var(--hieroglyph); margin-bottom: 16px; }
+  .packing-notice { background: linear-gradient(90deg, rgba(45, 106, 126, 0.1), transparent); border-left: 3px solid var(--nile); padding: 10px 14px; border-radius: 4px; font-size: 16px; color: var(--hieroglyph); margin-bottom: 16px; }
   .packing-notice strong { color: var(--nile-deep); }
 
   .packing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
   .pack-cat { background: rgba(255, 252, 244, 0.85); border: 1px solid rgba(184, 84, 49, 0.2); border-radius: 10px; padding: 16px; }
-  .pack-cat h3 { font-family: 'Noto Serif TC', serif; font-size: 16px; color: var(--terracotta-deep); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed rgba(184, 84, 49, 0.3); display: flex; align-items: center; gap: 8px; }
+  .pack-cat h3 { font-family: 'Noto Serif TC', serif; font-size: 18px; color: var(--terracotta-deep); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed rgba(184, 84, 49, 0.3); display: flex; align-items: center; gap: 8px; }
   .pack-cat h3 .cat-count { margin-left: auto; font-family: 'Cinzel', serif; font-size: 11px; color: var(--nile); font-weight: 500; }
   .pack-item { display: flex; align-items: center; gap: 8px; padding: 5px 0; cursor: pointer; user-select: none; transition: opacity 0.2s; }
   .pack-item input[type="checkbox"] { appearance: none; width: 18px; height: 18px; border: 2px solid var(--terracotta); border-radius: 3px; cursor: pointer; position: relative; flex-shrink: 0; background: var(--papyrus); transition: all 0.2s; }
   .pack-item input[type="checkbox"]:checked { background: var(--terracotta); }
   .pack-item input[type="checkbox"]:checked::after { content: '✓'; position: absolute; color: var(--papyrus); font-weight: bold; font-size: 13px; left: 50%; top: 50%; transform: translate(-50%, -50%); }
-  .pack-item span { font-size: 14px; color: var(--hieroglyph); flex: 1; }
+  .pack-item span { font-size: 16px; color: var(--hieroglyph); flex: 1; }
   .pack-item.checked span { text-decoration: line-through; opacity: 0.5; }
   .pack-item .del-btn { background: none; border: none; color: #c0392b; cursor: pointer; opacity: 0; transition: opacity 0.2s; font-size: 14px; padding: 0 4px; }
   .pack-item:hover .del-btn { opacity: 1; }
   .add-item-form { display: flex; gap: 6px; margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(184, 84, 49, 0.2); }
-  .add-item-form input { flex: 1; padding: 6px 10px; border: 1px solid rgba(184, 84, 49, 0.3); border-radius: 4px; background: var(--papyrus); font-family: inherit; font-size: 13px; color: var(--hieroglyph); }
+  .add-item-form input { flex: 1; padding: 8px 12px; border: 1px solid rgba(184, 84, 49, 0.3); border-radius: 4px; background: var(--papyrus); font-family: inherit; font-size: 16px; color: var(--hieroglyph); }
   .add-item-form input:focus { outline: none; border-color: var(--terracotta); }
-  .add-item-form button { background: var(--terracotta); color: var(--papyrus); border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-family: inherit; transition: background 0.2s; }
+  .add-item-form button { background: var(--terracotta); color: var(--papyrus); border: none; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-size: 15px; font-family: inherit; transition: background 0.2s; }
   .add-item-form button:hover { background: var(--terracotta-deep); }
 
   .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
   .contact-card { background: linear-gradient(135deg, rgba(45, 106, 126, 0.08), rgba(45, 106, 126, 0.02)); border: 1px solid var(--nile); border-radius: 10px; padding: 18px; position: relative; overflow: hidden; }
   .contact-card::before { content: ''; position: absolute; top: 0; right: 0; width: 60px; height: 60px; background: radial-gradient(circle at top right, rgba(45, 106, 126, 0.15), transparent); border-radius: 50%; transform: translate(20px, -20px); }
-  .contact-card .c-label { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; color: var(--nile); margin-bottom: 8px; text-transform: uppercase; }
-  .contact-card .c-name { font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700; color: var(--hieroglyph); margin-bottom: 6px; }
-  .contact-card .c-detail { font-size: 13px; color: #5a4a35; line-height: 1.6; }
-  .contact-card .c-phone { display: inline-block; background: var(--nile); color: var(--papyrus); padding: 4px 10px; border-radius: 4px; margin-top: 8px; text-decoration: none; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+  .contact-card .c-label { font-family: 'Noto Sans TC', sans-serif; font-size: 16px; font-weight: 600; color: var(--nile); margin-bottom: 8px; }
+  .contact-card .c-name { font-family: 'Noto Serif TC', serif; font-size: 19px; font-weight: 700; color: var(--hieroglyph); margin-bottom: 6px; }
+  .contact-card .c-detail { font-size: 16px; color: #5a4a35; line-height: 1.6; }
+  .contact-card .c-phone { display: inline-block; background: var(--nile); color: var(--papyrus); padding: 6px 12px; border-radius: 4px; margin-top: 8px; text-decoration: none; font-size: 16px; font-weight: 600; transition: all 0.2s; }
   .contact-card .c-phone:hover { background: var(--nile-deep); transform: scale(1.05); }
 
   /* HISTORY TIMELINE — 獨立可滑動容器 */
   .history-container { background: rgba(255, 252, 244, 0.85); border: 1px solid rgba(184, 84, 49, 0.25); border-radius: 12px; padding: 20px; }
-  .history-intro { font-size: 14px; color: #2a1f12; margin-bottom: 16px; padding: 12px 14px; background: linear-gradient(90deg, rgba(200, 155, 58, 0.12), transparent); border-left: 3px solid var(--gold); border-radius: 4px; }
+  .history-intro { font-size: 16px; color: #2a1f12; margin-bottom: 16px; padding: 12px 14px; background: linear-gradient(90deg, rgba(200, 155, 58, 0.12), transparent); border-left: 3px solid var(--gold); border-radius: 4px; }
 
   /* 關鍵: 只有此容器可橫向滑動,touch-action 限制 */
   .timeline-scroll-wrapper {
@@ -268,7 +268,7 @@
   .timeline-label.site-label { color: var(--nile-deep); border: 1px solid var(--nile); }
   .site-day-badge { display: inline-block; background: var(--terracotta); color: var(--papyrus); font-family: 'Cinzel', serif; font-size: 9px; padding: 1px 5px; border-radius: 2px; margin-left: 4px; font-weight: 700; }
 
-  .timeline-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px; padding-top: 16px; border-top: 1px dashed rgba(184, 84, 49, 0.3); font-size: 12px; color: #2a1f12; }
+  .timeline-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px; padding-top: 16px; border-top: 1px dashed rgba(184, 84, 49, 0.3); font-size: 16px; color: #2a1f12; }
   .timeline-legend .leg-item { display: flex; align-items: center; gap: 6px; }
   .timeline-legend .leg-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--papyrus); border: 2px solid; }
 
@@ -279,7 +279,7 @@
   .timeline-detail-overlay.active { display: block; }
   .timeline-detail h3 { font-family: 'Noto Serif TC', serif; font-size: 22px; color: var(--terracotta-deep); margin-bottom: 8px; padding-right: 30px; }
   .timeline-detail .td-era { display: inline-block; background: var(--gold); color: var(--papyrus); padding: 3px 10px; border-radius: 3px; font-size: 11px; font-weight: 600; margin-bottom: 14px; font-family: 'Cinzel', serif; letter-spacing: 0.05em; }
-  .timeline-detail .td-content { font-size: 14px; color: var(--hieroglyph); line-height: 1.75; margin-bottom: 12px; }
+  .timeline-detail .td-content { font-size: 16px; color: var(--hieroglyph); line-height: 1.75; margin-bottom: 12px; }
   .timeline-detail .td-close { position: absolute; top: 10px; right: 14px; background: none; border: none; font-size: 28px; cursor: pointer; color: var(--terracotta); font-weight: 300; line-height: 1; }
   .timeline-detail .td-badge { display: inline-block; background: var(--terracotta); color: var(--papyrus); padding: 3px 10px; border-radius: 3px; font-size: 11px; margin-top: 8px; font-weight: 600; }
 
@@ -292,7 +292,7 @@
   ::-webkit-scrollbar-thumb:hover { background: var(--terracotta-deep); }
   .hidden { display: none !important; }
 
-  .photo-tip { background: linear-gradient(135deg, rgba(200, 155, 58, 0.15), rgba(200, 155, 58, 0.03)); border-left: 3px solid var(--gold); padding: 8px 12px; border-radius: 4px; font-size: 12px; margin-top: 8px; color: var(--hieroglyph); word-break: break-word; line-height: 1.6; }
+  .photo-tip { background: linear-gradient(135deg, rgba(200, 155, 58, 0.15), rgba(200, 155, 58, 0.03)); border-left: 3px solid var(--gold); padding: 10px 14px; border-radius: 4px; font-size: 16px; margin-top: 12px; color: var(--hieroglyph); word-break: break-word; line-height: 1.6; }
   .photo-tip strong { color: var(--gold); display: inline-block; margin-right: 4px; }
 
   @media (max-width: 600px) {
@@ -418,9 +418,9 @@
           </div>
         </div>
       </div>
-      <div style="margin-top: 20px; padding: 14px; background: rgba(45, 106, 126, 0.06); border-radius: 8px; font-size: 13px; color: #2a1f12;">
-        <strong style="color: var(--terracotta-deep);">📖 三個重要觀察：</strong>
-        <ol style="padding-left: 20px; margin-top: 8px; line-height: 1.8;">
+      <div style="margin-top: 20px; padding: 16px; background: rgba(45, 106, 126, 0.06); border-radius: 8px; font-size: 16px; color: #2a1f12;">
+        <strong style="color: var(--terracotta-deep); font-size: 17px;">📖 三個重要觀察：</strong>
+        <ol style="padding-left: 20px; margin-top: 10px; line-height: 1.85;">
           <li><strong>金字塔超古老：</strong>古夫金字塔 (2570 BC) 建造時，其他神殿都還沒蓋！比拉美西斯二世還早 1300 年。</li>
           <li><strong>神殿都在新王國時期：</strong>卡納克、路克索、阿布辛貝都在新王國建造，是埃及最強盛的時期。</li>
           <li><strong>艾德福/康孟波/菲萊是希臘化時期：</strong>這三座神殿是托勒密王朝 (希臘人統治) 建的，所以保存最完整。</li>
@@ -756,23 +756,21 @@ const days = [
   },
   {
     num: 9, date: '5/07', dateFull: '2026/05/07 (四)',
-    title: '吉薩金字塔群 · 大埃及博物館',
-    route: '上午博物館 → 下午吉薩 → 老開羅',
+    title: '吉薩金字塔群 · 老開羅',
+    route: '上午自由時間 → 下午吉薩 (金字塔+人面獅身+騎駱駝) → 老開羅',
     highlights: [
-      { text: '⭐ 上午全新開幕的大埃及博物館', siteIdx: 0 },
-      { text: '重點:圖坦卡門寶藏' },
-      { text: '⭐ 下午吉薩三大金字塔', siteIdx: 1 },
-      { text: '金字塔旁人面獅身像', siteIdx: 2 },
+      { text: '上午飯店自由時間或補購紀念品' },
+      { text: '⭐ 下午吉薩三大金字塔', siteIdx: 0 },
+      { text: '金字塔旁人面獅身像', siteIdx: 1 },
       { text: '金字塔區騎駱駝體驗' },
       { text: '金字塔景觀餐廳午餐' },
-      { text: '老開羅懸吊教堂、香精工坊、莎草紙店', siteIdx: 3 }
+      { text: '老開羅懸吊教堂', siteIdx: 2 }
     ],
-    notes: ['⚠️ 金字塔區絕對禁止空拍機', '入內參觀其中一座金字塔 (門票含)', '騎駱駝請聽從駱駝伕指示', '心臟病/孕婦請斟酌', '可購買埃及特產 (香精、莎草紙)'],
+    notes: ['⚠️ 金字塔區絕對禁止空拍機', '入內參觀其中一座金字塔 (門票含)', '騎駱駝請聽從駱駝伕指示', '心臟病/孕婦請斟酌'],
     meals: { b: '旅館早餐', l: '金字塔區景觀餐廳', d: '非洲料理塔吉鍋' },
     hotel: 'Pyramids Park Resort',
     optional: [],
     points: [
-      { name: '大埃及博物館', lat: 29.9933, lng: 31.1196, tip: '⭐ 全新開幕,圖坦卡門寶藏', desc: '2024 年才全面開幕的全球最大考古博物館!佔地 48 萬平方公尺,收藏了埃及 70 萬年的文物,共 12 個展廳。重點是圖坦卡門法老的全部寶藏 (5000 多件),包括最有名的黃金面具。圖坦卡門是 9 歲就當上法老,19 歲就過世的少年法老,他的陵墓是 1922 年被英國考古學家發現的,震驚世界。', era: '現代 · 2024 AD' },
       { name: '吉薩金字塔群', lat: 29.9792, lng: 31.1342, tip: '⭐ 世界七大奇蹟', desc: '古王國時期建造,約西元前 2570 年,距今 4600 年!三座金字塔由祖孫三代法老建造:古夫 (爺爺)、卡夫拉 (爸爸)、曼考拉 (孫子)。古夫金字塔原本高 146 公尺,用了 230 萬塊石頭,每塊重 2.5 噸。是世界七大奇蹟中唯一還存在的。門票含入內參觀其中一座。', era: '古王國 · 2570 BC' },
       { name: '人面獅身像', lat: 29.9753, lng: 31.1376, tip: '74m 長的謎樣神獸', desc: '和金字塔差不多年代 (約 2500 BC),用整座石灰岩山雕成,長 74 公尺、高 20 公尺。它有人的臉 (據說是卡夫拉法老)、獅子的身體,守護著金字塔群。鼻子被打掉的原因至今是謎。', era: '古王國 · 2500 BC' },
       { name: '懸吊教堂', lat: 30.0058, lng: 31.2306, tip: '老開羅區,29 級台階', desc: '公元 3 世紀的基督教教堂,因為是蓋在羅馬要塞的兩個塔樓之間,沒有地基而是「懸空」,所以叫懸吊教堂。要走 29 級台階才能進去。現在旅客戲稱它是「樓梯教堂」。', era: '羅馬/基督教時期 · 3 世紀 AD' }
@@ -781,21 +779,25 @@ const days = [
   },
   {
     num: 10, date: '5/08', dateFull: '2026/05/08 (五)',
-    title: '開羅 → 杜拜 · 返程',
-    route: '購物 → 開羅機場 → EK924 → 杜拜轉機',
+    title: '大埃及博物館 → 杜拜',
+    route: '大埃及博物館 → 香精工坊 → 莎草紙店 → 開羅機場 → EK924',
     highlights: [
-      { text: '上午自由時間 / 補購紀念品' },
-      { text: '20:05 開羅起飛 (約 17:00 抵機場)', siteIdx: 0 },
+      { text: '⭐ 上午全新開幕的大埃及博物館', siteIdx: 0 },
+      { text: '重點:圖坦卡門寶藏 + 黃金面具' },
+      { text: '參觀香精工坊 (法老時代就有的工藝)' },
+      { text: '參觀莎草紙畫精品店' },
+      { text: '20:05 開羅起飛 (約 17:00 抵機場)', siteIdx: 1 },
       { text: '00:40 (+1) 抵達杜拜,等待轉機' }
     ],
-    notes: ['⚠️ 護照、機票、貴重物品再三檢查', '電子菸、肉製品千萬不要帶', '行李寄存的記得取回', '機場小費 $1 USD/件'],
+    notes: ['⚠️ 護照、機票、貴重物品再三檢查', '電子菸、肉製品千萬不要帶', '行李寄存的記得取回', '機場小費 $1 USD/件', '可購買埃及特產 (香精油、莎草紙畫)'],
     meals: { b: '旅館早餐', l: '埃及風味料理', d: '機上簡餐' },
     hotel: '機上過夜',
     optional: [],
     points: [
+      { name: '大埃及博物館', lat: 29.9933, lng: 31.1196, tip: '⭐ 全新開幕,圖坦卡門寶藏', desc: '2024 年才全面開幕的全球最大考古博物館!佔地 48 萬平方公尺,收藏了埃及 70 萬年的文物,共 12 個展廳。重點是圖坦卡門法老的全部寶藏 (5000 多件),包括最有名的黃金面具。圖坦卡門是 9 歲就當上法老,19 歲就過世的少年法老,他的陵墓是 1922 年被英國考古學家發現的,震驚世界。', era: '現代 · 2024 AD' },
       { name: '開羅國際機場', lat: 30.1219, lng: 31.4056, tip: '20:05 起飛,提早報到', desc: '準備離開埃及啦!記得再次檢查行李,電子菸和含肉製品絕對不能帶回台灣。' }
     ],
-    photoTip: '出境前在金字塔對面飯店拍最後一張紀念'
+    photoTip: '大埃及博物館的圖坦卡門黃金面具,記得多角度拍'
   },
   {
     num: 11, date: '5/09', dateFull: '2026/05/09 (六)',
@@ -899,8 +901,8 @@ const timelineSites = [
 
 // ============== PACKING DATA ==============
 const defaultPackingData = {
-  '一、衣物 — 上身': ['短袖 T-shirt × 5-6 件', '長袖薄上衣 × 2-3 件', '薄外套 (防曬用)', '防風外套 (清晨/神廟用)', '長袖防曬外套'],
-  '一、衣物 — 下身與其他': ['長褲 × 3 條 (清真寺必須)', '輕薄長裙/七分褲', '泳衣/泳褲 (河輪+紅海)', '泳帽 (河輪用)', '內衣褲 × 6-8 套', '免洗內褲 (河輪可用)', '襪子 × 6 雙', '睡衣 × 2 套', '舒適好走的鞋 (主要)', '拖鞋 (海邊+飯店)', '頭巾/披肩 (防曬+清真寺)'],
+  '一、衣物 — 上身': ['短袖 T-shirt × 8-10 件', '長袖薄上衣 × 3-4 件', '薄外套 (防曬用)', '防風外套 (清晨/神廟用)', '長袖防曬外套'],
+  '一、衣物 — 下身與其他': ['長褲 × 3-4 條 (清真寺必須)', '輕薄長裙/七分褲 × 2', '泳衣/泳褲 (河輪+紅海)', '泳帽 (河輪用)', '內衣褲 × 11-13 套 (建議帶滿)', '免洗內褲 × 數件 (河輪可用)', '襪子 × 10-12 雙', '睡衣 × 2-3 套', '舒適好走的鞋 (主要)', '拖鞋 (海邊+飯店)', '頭巾/披肩 (防曬+清真寺)'],
   '二、防曬與防護': ['SPF50 防曬乳 (大瓶託運)', 'SPF50 防曬乳 (100ml 隨身)', '太陽眼鏡 (UV400)', '寬邊帽/遮陽帽', '口罩 (馬車+風沙用)', '小型陽傘 (可遮陽)', '保濕乳液 (氣候極乾)', '護唇膏/凡士林', '面膜 (補救乾燥)', '保濕噴霧'],
   '三、藥品與健康': ['腸胃藥 (重要)', '止瀉藥', '止痛藥', '感冒藥', '暈車藥 (D6/D8 巴士長途)', 'OK 蹦/水泡貼', '個人慢性病藥', '保健食品/維他命', '電解質粉 (補水)', '小護士/曼秀雷敦', '蚊蟲叮咬藥膏'],
   '四、盥洗與美保': ['牙刷牙膏 (飯店多無)', '小條洗髮精 (100ml 隨身)', '小條沐浴乳/肥皂', '潤髮乳/護髮', '梳子', '隱形眼鏡+藥水', '指緣油/護手霜', '化妝品 (簡裝)', '電動牙刷', '濕紙巾'],
